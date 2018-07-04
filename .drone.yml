@@ -1,0 +1,83 @@
+workspace:
+  base: /drone/src
+  path: github.com/owncloud/translation-sync
+
+branches:
+  - mobile
+
+clone:
+  git:
+    image: plugins/git:1
+    pull: true
+    tags: false
+    recursive: false
+    remote: ${REPO_URL}
+    ref: ${REPO_BRANCH}
+    sha: FETCH_HEAD
+
+pipeline:
+  translation-push:
+    image: toolhippie/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+      - tx -d push -s --no-interactive
+    when:
+      event: [ push ]
+
+  translation-pull:
+    image: toolhippie/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+      - tx -d pull -a --minimum-perc=75
+    when:
+      event: [ push ]
+
+  translation-commit:
+    image: plugins/git-push:1
+    pull: true
+    secrets: [ git_push_ssh_key ]
+    author_name: ownClouders
+    author_email: devops@owncloud.com
+    remote: ${REPO_GIT}
+    remote_name: upstream
+    branch: ${REPO_BRANCH}
+    empty_commit: false
+    commit: true
+    commit_message: '[tx] updated from transifex'
+    when:
+      event: [ push ]
+
+  notify-rocketchat:
+    image: plugins/slack:1
+    pull: true
+    secrets: [ slack_webhook ]
+    channel: mobile
+    template: >
+      *{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}> <${REPO_URL}|${REPO_NAME}@${REPO_BRANCH}>
+    when:
+      event: [ push ]
+      status: [ changed, failure ]
+
+matrix:
+  include:
+    - REPO_NAME: ios-app
+      REPO_URL: https://github.com/owncloud/ios-app.git
+      REPO_GIT: git@github.com:owncloud/ios-app.git
+      REPO_BRANCH: master
+
+    - REPO_NAME: ios-sdk
+      REPO_URL: https://github.com/owncloud/ios-sdk.git
+      REPO_GIT: git@github.com:owncloud/ios-sdk.git
+      REPO_BRANCH: master
+
+    - REPO_NAME: ios-old
+      REPO_URL: https://github.com/owncloud/ios.git
+      REPO_GIT: git@github.com:owncloud/ios.git
+      REPO_BRANCH: master
+
+    - REPO_NAME: android-app
+      REPO_URL: https://github.com/owncloud/android.git
+      REPO_GIT: git@github.com:owncloud/android.git
+      REPO_BRANCH: master
