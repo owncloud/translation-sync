@@ -277,8 +277,8 @@ matrix:
       REPO_PATH: .
 
     - REPO_NAME: twofactor_privacyidea
-      REPO_URL: https://github.com/privacyidea/privacyidea_owncloud_app.git
-      REPO_GIT: git@github.com:privacyidea/privacyidea_owncloud_app.git
+      REPO_URL: https://github.com/privacyidea/privacyidea-owncloud-app.git
+      REPO_GIT: git@github.com:privacyidea/privacyidea-owncloud-app.git
       REPO_BRANCH: master
       REPO_PATH: ./twofactor_privacyidea
 
