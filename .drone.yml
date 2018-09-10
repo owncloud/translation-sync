@@ -99,7 +99,7 @@ pipeline:
     image: plugins/slack:1
     pull: true
     secrets: [ slack_webhook ]
-    channel: mobile
+    channel: server
     template: >
       *{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}> <${REPO_URL}|${REPO_NAME}@${REPO_BRANCH}>
     when:
