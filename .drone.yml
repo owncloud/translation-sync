@@ -216,12 +216,6 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
 
-    - REPO_NAME: music
-      REPO_URL: https://github.com/owncloud/music.git
-      REPO_GIT: git@github.com:owncloud/music.git
-      REPO_BRANCH: master
-      REPO_PATH: .
-
     - REPO_NAME: notes
       REPO_URL: https://github.com/owncloud/notes.git
       REPO_GIT: git@github.com:owncloud/notes.git
