@@ -120,6 +120,12 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
 
+    - REPO_NAME: brute_force_protection
+      REPO_URL: https://github.com/owncloud/brute_force_protection.git
+      REPO_GIT: git@github.com:owncloud/brute_force_protection.git
+      REPO_BRANCH: master
+      REPO_PATH: .
+
     - REPO_NAME: calendar
       REPO_URL: https://github.com/owncloud/calendar.git
       REPO_GIT: git@github.com:owncloud/calendar.git
