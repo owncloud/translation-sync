@@ -30,10 +30,23 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
-      - cd ${REPO_PATH}/l10n
-      - l10n ${REPO_NAME} read
+    - cd ${REPO_PATH}/l10n
+    - l10n ${REPO_NAME} read
     when:
       event: [ push ]
+      matrix:
+        MODE: OLD
+
+  translation-reader-make:
+    image: owncloudci/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+    - make l10n-read
+    when:
+      event: [ push ]
+      matrix:
+        MODE: MAKE
 
   translation-push:
     image: owncloudci/transifex:latest
@@ -60,10 +73,23 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
-      - cd ${REPO_PATH}/l10n
-      - l10n ${REPO_NAME} write
+    - cd ${REPO_PATH}/l10n
+    - l10n ${REPO_NAME} write
     when:
       event: [ push ]
+      matrix:
+        MODE: OLD
+
+  translation-writer-make:
+    image: owncloudci/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+    - make l10n-write
+    when:
+      event: [ push ]
+      matrix:
+        MODE: MAKE
 
   translation-cleanup:
     image: owncloudci/transifex:latest
@@ -113,189 +139,228 @@ matrix:
       REPO_GIT: git@github.com:owncloud/activity.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: announcementcenter
       REPO_URL: https://github.com/owncloud/announcementcenter.git
       REPO_GIT: git@github.com:owncloud/announcementcenter.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: brute_force_protection
       REPO_URL: https://github.com/owncloud/brute_force_protection.git
       REPO_GIT: git@github.com:owncloud/brute_force_protection.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: calendar
       REPO_URL: https://github.com/owncloud/calendar.git
       REPO_GIT: git@github.com:owncloud/calendar.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: contacts
       REPO_URL: https://github.com/owncloud/contacts.git
       REPO_GIT: git@github.com:owncloud/contacts.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: customgroups
       REPO_URL: https://github.com/owncloud/customgroups.git
       REPO_GIT: git@github.com:owncloud/customgroups.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: diagnostics
       REPO_URL: https://github.com/owncloud/diagnostics.git
       REPO_GIT: git@github.com:owncloud/diagnostics.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: external
       REPO_URL: https://github.com/owncloud/external.git
       REPO_GIT: git@github.com:owncloud/external.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: files_antivirus
       REPO_URL: https://github.com/owncloud/files_antivirus.git
       REPO_GIT: git@github.com:owncloud/files_antivirus.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: files_external_dropbox
       REPO_URL: https://github.com/owncloud/files_external_dropbox.git
       REPO_GIT: git@github.com:owncloud/files_external_dropbox.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: files_external_ftp
       REPO_URL: https://github.com/owncloud/files_external_ftp.git
       REPO_GIT: git@github.com:owncloud/files_external_ftp.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: files_external_gdrive
       REPO_URL: https://github.com/owncloud/files_external_gdrive.git
       REPO_GIT: git@github.com:owncloud/files_external_gdrive.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: files_paperhive
       REPO_URL: https://github.com/owncloud/files_paperhive.git
       REPO_GIT: git@github.com:owncloud/files_paperhive.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: files_texteditor
       REPO_URL: https://github.com/owncloud/files_texteditor.git
       REPO_GIT: git@github.com:owncloud/files_texteditor.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: firstrunwizard
       REPO_URL: https://github.com/owncloud/firstrunwizard.git
       REPO_GIT: git@github.com:owncloud/firstrunwizard.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: gallery
       REPO_URL: https://github.com/owncloud/gallery.git
       REPO_GIT: git@github.com:owncloud/gallery.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: guests
       REPO_URL: https://github.com/owncloud/guests.git
       REPO_GIT: git@github.com:owncloud/guests.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: impersonate
       REPO_URL: https://github.com/owncloud/impersonate.git
       REPO_GIT: git@github.com:owncloud/impersonate.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: maps
       REPO_URL: https://github.com/owncloud/maps.git
       REPO_GIT: git@github.com:owncloud/maps.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: notes
       REPO_URL: https://github.com/owncloud/notes.git
       REPO_GIT: git@github.com:owncloud/notes.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: notifications
       REPO_URL: https://github.com/owncloud/notifications.git
       REPO_GIT: git@github.com:owncloud/notifications.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: oauth2
       REPO_URL: https://github.com/owncloud/oauth2.git
       REPO_GIT: git@github.com:owncloud/oauth2.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: password_policy
       REPO_URL: https://github.com/owncloud/password_policy.git
       REPO_GIT: git@github.com:owncloud/password_policy.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: richdocuments
       REPO_URL: https://github.com/owncloud/richdocuments.git
       REPO_GIT: git@github.com:owncloud/richdocuments.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: security
       REPO_URL: https://github.com/owncloud/security.git
       REPO_GIT: git@github.com:owncloud/security.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: tasks
       REPO_URL: https://github.com/owncloud/tasks.git
       REPO_GIT: git@github.com:owncloud/tasks.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: templateeditor
       REPO_URL: https://github.com/owncloud/templateeditor.git
       REPO_GIT: git@github.com:owncloud/templateeditor.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: twofactor_backup_codes
       REPO_URL: https://github.com/owncloud/twofactor_backup_codes.git
       REPO_GIT: git@github.com:owncloud/twofactor_backup_codes.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: twofactor_privacyidea
       REPO_URL: https://github.com/privacyidea/privacyidea-owncloud-app.git
       REPO_GIT: git@github.com:privacyidea/privacyidea-owncloud-app.git
       REPO_BRANCH: master
       REPO_PATH: ./twofactor_privacyidea
+      MODE: OLD
 
     - REPO_NAME: twofactor_totp
       REPO_URL: https://github.com/owncloud/twofactor_totp.git
       REPO_GIT: git@github.com:owncloud/twofactor_totp.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: user_ldap
       REPO_URL: https://github.com/owncloud/user_ldap.git
       REPO_GIT: git@github.com:owncloud/user_ldap.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
 
     - REPO_NAME: user_management
       REPO_URL: https://github.com/owncloud/user_management.git
       REPO_GIT: git@github.com:owncloud/user_management.git
       REPO_BRANCH: master
       REPO_PATH: .
+      MODE: OLD
+
+    - REPO_NAME: phoenix
+      REPO_URL: https://github.com/owncloud/phoenix.git
+      REPO_GIT: git@github.com:owncloud/phoenix.git
+      REPO_BRANCH: feature/integrate-tranisfex
+      REPO_PATH: .
+      MODE: MAKE
