@@ -363,5 +363,5 @@ matrix:
       REPO_GIT: git@github.com:owncloud/phoenix.git
       REPO_BRANCH: feature/integrate-tranisfex
       REPO_PATH: .
-      MAKE_IMAGE: owncloudci/nodejs
+      MAKE_IMAGE: owncloudci/php
       MODE: MAKE
