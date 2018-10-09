@@ -53,20 +53,46 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
-      - cd ${REPO_PATH}/l10n
-      - tx -d push -s --skip --no-interactive
+    - cd ${REPO_PATH}/l10n
+    - tx -d push -s --skip --no-interactive
     when:
       event: [ push ]
+      matrix:
+        MODE: OLD
+
+  translation-push-make:
+    image: owncloudci/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+    - make l10n-push
+    when:
+      event: [ push ]
+      matrix:
+        MODE: OLD
 
   translation-pull:
     image: owncloudci/transifex:latest
     pull: true
     secrets: [ tx_token ]
     commands:
-      - cd ${REPO_PATH}/l10n
-      - tx -d pull -a --skip --minimum-perc=75
+    - cd ${REPO_PATH}/l10n
+    - tx -d pull -a --skip --minimum-perc=75
     when:
       event: [ push ]
+      matrix:
+        MODE: OLD
+
+  translation-pull-make:
+    image: owncloudci/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+    - make l10n-pull
+    when:
+      event: [ push ]
+      matrix:
+        MODE: MAKE
 
   translation-writer:
     image: owncloudci/transifex:latest
@@ -96,15 +122,28 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
-      - cd ${REPO_PATH}/l10n
-      - find . -name \*.po -type f -delete
-      - find . -name \*.pot -type f -delete
-      - find . -name or_IN.\* -type f  -print0 | xargs -r -0 git rm -f
-      - find . -name uz.\* -type f  -print0 | xargs -r -0 git rm -f
-      - find . -name yo.\* -type f  -print0 | xargs -r -0 git rm -f
-      - find . -name ne.\* -type f  -print0 | xargs -r -0 git rm -f
+    - cd ${REPO_PATH}/l10n
+    - find . -name \*.po -type f -delete
+    - find . -name \*.pot -type f -delete
+    - find . -name or_IN.\* -type f  -print0 | xargs -r -0 git rm -f
+    - find . -name uz.\* -type f  -print0 | xargs -r -0 git rm -f
+    - find . -name yo.\* -type f  -print0 | xargs -r -0 git rm -f
+    - find . -name ne.\* -type f  -print0 | xargs -r -0 git rm -f
     when:
       event: [ push ]
+      matrix:
+        MODE: OLD
+
+  translation-cleanup-make:
+    image: owncloudci/transifex:latest
+    pull: true
+    secrets: [ tx_token ]
+    commands:
+      - make l10n-clean
+    when:
+      event: [ push ]
+      matrix:
+        MODE: MAKE
 
   translation-commit:
     image: plugins/git-push:1
