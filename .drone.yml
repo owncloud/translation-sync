@@ -400,7 +400,7 @@ matrix:
     - REPO_NAME: phoenix
       REPO_URL: https://github.com/owncloud/phoenix.git
       REPO_GIT: git@github.com:owncloud/phoenix.git
-      REPO_BRANCH: feature/integrate-tranisfex
+      REPO_BRANCH: master
       REPO_PATH: .
       MAKE_IMAGE: owncloudci/php
       MODE: MAKE
