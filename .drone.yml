@@ -61,7 +61,7 @@ pipeline:
         MODE: OLD
 
   translation-push-make:
-    image: owncloudci/transifex:latest
+    image: ${MAKE_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
@@ -69,7 +69,7 @@ pipeline:
     when:
       event: [ push ]
       matrix:
-        MODE: OLD
+        MODE: MAKE
 
   translation-pull:
     image: owncloudci/transifex:latest
@@ -84,7 +84,7 @@ pipeline:
         MODE: OLD
 
   translation-pull-make:
-    image: owncloudci/transifex:latest
+    image: ${MAKE_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
@@ -135,7 +135,7 @@ pipeline:
         MODE: OLD
 
   translation-cleanup-make:
-    image: owncloudci/transifex:latest
+    image: ${MAKE_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
