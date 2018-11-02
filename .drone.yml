@@ -341,13 +341,6 @@ matrix:
       REPO_PATH: .
       MODE: OLD
 
-    - REPO_NAME: security
-      REPO_URL: https://github.com/owncloud/security.git
-      REPO_GIT: git@github.com:owncloud/security.git
-      REPO_BRANCH: master
-      REPO_PATH: .
-      MODE: OLD
-
     - REPO_NAME: tasks
       REPO_URL: https://github.com/owncloud/tasks.git
       REPO_GIT: git@github.com:owncloud/tasks.git
