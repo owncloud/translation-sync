@@ -299,13 +299,6 @@ matrix:
       REPO_PATH: .
       MODE: OLD
 
-    - REPO_NAME: maps
-      REPO_URL: https://github.com/owncloud/maps.git
-      REPO_GIT: git@github.com:owncloud/maps.git
-      REPO_BRANCH: master
-      REPO_PATH: .
-      MODE: OLD
-
     - REPO_NAME: notes
       REPO_URL: https://github.com/owncloud/notes.git
       REPO_GIT: git@github.com:owncloud/notes.git
