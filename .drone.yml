@@ -157,6 +157,7 @@ pipeline:
     empty_commit: false
     commit: true
     commit_message: '[tx] updated from transifex'
+    no_verify: true
     when:
       event: [ push ]
 
