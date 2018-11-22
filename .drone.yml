@@ -146,7 +146,7 @@ pipeline:
         MODE: MAKE
 
   translation-commit:
-    image: plugins/git-push:1
+    image: appleboy/drone-git-push:latest
     pull: true
     secrets: [ git_push_ssh_key ]
     author_name: ownClouders
