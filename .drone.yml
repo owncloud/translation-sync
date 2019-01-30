@@ -77,7 +77,7 @@ pipeline:
     secrets: [ tx_token ]
     commands:
     - cd ${REPO_PATH}/l10n
-    - tx -d pull -a --skip --minimum-perc=75
+    - tx -d pull -a --skip --minimum-perc=75 -f
     when:
       event: [ push ]
       matrix:
