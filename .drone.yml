@@ -30,7 +30,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
-      - tx -d pull -a --minimum-perc=75
+      - tx -d pull -a --minimum-perc=75 -f
     when:
       event: [ push ]
 
