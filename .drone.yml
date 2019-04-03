@@ -12,7 +12,7 @@ clone:
     tags: false
     recursive: false
     remote: ${REPO_URL}
-    ref: ${REPO_BRANCH}
+    ref: ${REPO_CLONE_BRANCH}
     sha: FETCH_HEAD
 
 pipeline:
@@ -42,7 +42,7 @@ pipeline:
     author_email: devops@owncloud.com
     remote: ${REPO_GIT}
     remote_name: upstream
-    branch: ${REPO_BRANCH}
+    branch: ${REPO_COMMIT_BRANCH}
     empty_commit: false
     commit: true
     commit_message: '[tx] updated from transifex'
@@ -55,7 +55,7 @@ pipeline:
     secrets: [ slack_webhook ]
     channel: mobile
     template: >
-      *{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}> <${REPO_URL}|${REPO_NAME}@${REPO_BRANCH}>
+      *{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}> <${REPO_URL}|${REPO_NAME}@${REPO_COMMIT_BRANCH}>
     when:
       event: [ push ]
       status: [ changed, failure ]
@@ -65,19 +65,23 @@ matrix:
     - REPO_NAME: ios-app
       REPO_URL: https://github.com/owncloud/ios-app.git
       REPO_GIT: git@github.com:owncloud/ios-app.git
-      REPO_BRANCH: translation-sync
+      REPO_CLONE_BRANCH: master
+      REPO_COMMIT_BRANCH: translation-sync
 
     - REPO_NAME: ios-sdk
       REPO_URL: https://github.com/owncloud/ios-sdk.git
       REPO_GIT: git@github.com:owncloud/ios-sdk.git
-      REPO_BRANCH: translation-sync
+      REPO_CLONE_BRANCH: master
+      REPO_COMMIT_BRANCH: translation-sync
 
     - REPO_NAME: ios-old
       REPO_URL: https://github.com/owncloud/ios.git
       REPO_GIT: git@github.com:owncloud/ios.git
-      REPO_BRANCH: master
+      REPO_CLONE_BRANCH: master
+      REPO_COMMIT_BRANCH: master
 
     - REPO_NAME: android-app
       REPO_URL: https://github.com/owncloud/android.git
       REPO_GIT: git@github.com:owncloud/android.git
-      REPO_BRANCH: master
+      REPO_CLONE_BRANCH: master
+      REPO_COMMIT_BRANCH: master
