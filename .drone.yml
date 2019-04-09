@@ -39,7 +39,7 @@ pipeline:
         MODE: OLD
 
   translation-reader-make:
-    image: ${TRANSLATION_READER_IMAGE}
+    image: ${TRANSLATION_READER_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
@@ -111,7 +111,7 @@ pipeline:
         MODE: OLD
 
   translation-writer-make:
-    image: ${TRANSLATION_WRITER_IMAGE}
+    image: ${TRANSLATION_WRITER_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
@@ -397,8 +397,6 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
       MODE: MAKE
-      TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
-      TRANSLATION_WRITER_IMAGE: owncloudci/transifex:latest
 
     - REPO_NAME: windows_phone
       REPO_URL: https://github.com/owncloud/OwncloudUniversal.git
@@ -406,8 +404,6 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
       MODE: MAKE
-      TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
-      TRANSLATION_WRITER_IMAGE: owncloudci/transifex:latest
 
     - REPO_NAME: client
       REPO_URL: https://github.com/owncloud/client.git
@@ -416,7 +412,6 @@ matrix:
       REPO_PATH: translations
       MODE: MAKE
       TRANSLATION_READER_IMAGE: rabits/qt:5.12-desktop
-      TRANSLATION_WRITER_IMAGE: owncloudci/transifex:latest
 
     - REPO_NAME: client-nsis
       REPO_URL: https://github.com/owncloud/client.git
@@ -424,5 +419,4 @@ matrix:
       REPO_BRANCH: tx
       REPO_PATH: admin/win/nsi/l10n
       MODE: MAKE
-      TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
       TRANSLATION_WRITER_IMAGE: python:2.7-stretch

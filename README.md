@@ -10,7 +10,7 @@ You can test the synchronisation of translations for a specific repo by cloning 
 
 ```
 git clone https://github.com/owncloud/phoenix.git
-TX_TOKEN=... REPO_NAME=owncloud_universal REPO_URL=https://github.com/owncloud/phoenix.git REPO_GIT=git@github.com:owncloud/phoenix.git REPO_BRANCH=master REPO_PATH=phoenix MODE=MAKE TRANSLATION_READER_IMAGE=owncloudci/transifex:latest TRANSLATION_WRITER_IMAGE=owncloudci/transifex:latest drone exec --local --build-event push
+TX_TOKEN=... REPO_NAME=owncloud_universal REPO_URL=https://github.com/owncloud/phoenix.git REPO_GIT=git@github.com:owncloud/phoenix.git REPO_BRANCH=master REPO_PATH=phoenix MODE=MAKE drone exec --local --build-event push
 ```
 
 The trick is to prepend the folder to which the repo was cloned to the `REPO_PATH`.
