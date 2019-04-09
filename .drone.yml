@@ -42,6 +42,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-read
     when:
       event: [ push ]
@@ -65,6 +66,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-push
     when:
       event: [ push ]
@@ -88,6 +90,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-pull
     when:
       event: [ push ]
@@ -111,6 +114,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-write
     when:
       event: [ push ]
@@ -139,6 +143,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+      - cd ${REPO_PATH}
       - make l10n-clean
     when:
       event: [ push ]
@@ -158,6 +163,7 @@ pipeline:
     commit: true
     commit_message: '[tx] updated from transifex'
     no_verify: true
+    path: ${REPO_PATH}
     when:
       event: [ push ]
 
