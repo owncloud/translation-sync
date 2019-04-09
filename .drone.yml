@@ -181,6 +181,13 @@ pipeline:
 
 matrix:
   include:
+    - REPO_NAME: core
+      REPO_URL: https://github.com/owncloud/core.git
+      REPO_GIT: git@github.com:owncloud/core.git
+      REPO_BRANCH: master
+      REPO_PATH: .
+      MODE: MAKE
+
     - REPO_NAME: activity
       REPO_URL: https://github.com/owncloud/activity.git
       REPO_GIT: git@github.com:owncloud/activity.git
