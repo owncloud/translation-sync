@@ -184,8 +184,8 @@ matrix:
     - REPO_NAME: core
       REPO_URL: https://github.com/owncloud/core.git
       REPO_GIT: git@github.com:owncloud/core.git
-      REPO_BRANCH: master
-      REPO_PATH: .
+      REPO_BRANCH: tx
+      REPO_PATH: l10n
       MODE: MAKE
 
     - REPO_NAME: activity
