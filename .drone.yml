@@ -405,3 +405,11 @@ matrix:
       REPO_PATH: .
       MODE: MAKE
       TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
+
+    - REPO_NAME: client
+      REPO_URL: https://github.com/owncloud/client.git
+      REPO_GIT: git@github.com:owncloud/client.git
+      REPO_BRANCH: 2.5
+      REPO_PATH: translations
+      MODE: MAKE
+      TRANSLATION_READER_IMAGE: rabits/qt:5.12-desktop
