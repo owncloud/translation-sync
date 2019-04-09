@@ -38,7 +38,7 @@ pipeline:
         MODE: OLD
 
   translation-reader-make:
-    image: owncloudci/transifex:latest
+    image: ${TRANSLATION_READER_IMAGE}
     pull: true
     secrets: [ tx_token ]
     commands:
@@ -396,6 +396,7 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
       MODE: MAKE
+      TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
 
     - REPO_NAME: windows_phone
       REPO_URL: https://github.com/owncloud/OwncloudUniversal.git
@@ -403,3 +404,4 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
       MODE: MAKE
+      TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
