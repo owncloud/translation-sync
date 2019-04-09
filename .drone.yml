@@ -416,3 +416,12 @@ matrix:
       MODE: MAKE
       TRANSLATION_READER_IMAGE: rabits/qt:5.12-desktop
       TRANSLATION_WRITER_IMAGE: owncloudci/transifex:latest
+
+    - REPO_NAME: client-nsis
+      REPO_URL: https://github.com/owncloud/client.git
+      REPO_GIT: git@github.com:owncloud/client.git
+      REPO_BRANCH: 2.5
+      REPO_PATH: admin/win/nsi/l10n
+      MODE: MAKE
+      TRANSLATION_READER_IMAGE: owncloudci/transifex:latest
+      TRANSLATION_WRITER_IMAGE: python:2.7-stretch
