@@ -65,13 +65,13 @@ matrix:
     - REPO_NAME: ios-app
       REPO_URL: https://github.com/owncloud/ios-app.git
       REPO_GIT: git@github.com:owncloud/ios-app.git
-      REPO_CLONE_BRANCH: master
+      REPO_CLONE_BRANCH: translation-sync
       REPO_COMMIT_BRANCH: translation-sync
 
     - REPO_NAME: ios-sdk
       REPO_URL: https://github.com/owncloud/ios-sdk.git
       REPO_GIT: git@github.com:owncloud/ios-sdk.git
-      REPO_CLONE_BRANCH: master
+      REPO_CLONE_BRANCH: translation-sync
       REPO_COMMIT_BRANCH: translation-sync
 
     - REPO_NAME: ios-old
