@@ -4,7 +4,6 @@ workspace:
 
 branches:
   - master
-  - die-jenkins-die
 
 clone:
   git:
