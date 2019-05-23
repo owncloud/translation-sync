@@ -38,10 +38,11 @@ pipeline:
         MODE: OLD
 
   translation-reader-make:
-    image: owncloudci/transifex:latest
+    image: ${TRANSLATION_READER_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-read
     when:
       event: [ push ]
@@ -65,6 +66,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-push
     when:
       event: [ push ]
@@ -88,6 +90,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-pull
     when:
       event: [ push ]
@@ -107,10 +110,11 @@ pipeline:
         MODE: OLD
 
   translation-writer-make:
-    image: owncloudci/transifex:latest
+    image: ${TRANSLATION_WRITER_IMAGE=owncloudci/transifex:latest}
     pull: true
     secrets: [ tx_token ]
     commands:
+    - cd ${REPO_PATH}
     - make l10n-write
     when:
       event: [ push ]
@@ -139,6 +143,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
+      - cd ${REPO_PATH}
       - make l10n-clean
     when:
       event: [ push ]
@@ -158,6 +163,7 @@ pipeline:
     commit: true
     commit_message: '[tx] updated from transifex'
     no_verify: true
+    path: ${REPO_PATH}
     when:
       event: [ push ]
 
@@ -174,6 +180,13 @@ pipeline:
 
 matrix:
   include:
+    - REPO_NAME: core
+      REPO_URL: https://github.com/owncloud/core.git
+      REPO_GIT: git@github.com:owncloud/core.git
+      REPO_BRANCH: tx
+      REPO_PATH: l10n
+      MODE: MAKE
+
     - REPO_NAME: activity
       REPO_URL: https://github.com/owncloud/activity.git
       REPO_GIT: git@github.com:owncloud/activity.git
@@ -390,3 +403,26 @@ matrix:
       REPO_BRANCH: master
       REPO_PATH: .
       MODE: MAKE
+
+    - REPO_NAME: windows_phone
+      REPO_URL: https://github.com/owncloud/OwncloudUniversal.git
+      REPO_GIT: git@github.com:owncloud/OwncloudUniversal.git
+      REPO_BRANCH: master
+      REPO_PATH: .
+      MODE: MAKE
+
+    - REPO_NAME: client
+      REPO_URL: https://github.com/owncloud/client.git
+      REPO_GIT: git@github.com:owncloud/client.git
+      REPO_BRANCH: 2.6
+      REPO_PATH: translations
+      MODE: MAKE
+      TRANSLATION_READER_IMAGE: rabits/qt:5.12-desktop
+
+    - REPO_NAME: client-nsis
+      REPO_URL: https://github.com/owncloud/client.git
+      REPO_GIT: git@github.com:owncloud/client.git
+      REPO_BRANCH: 2.6
+      REPO_PATH: admin/win/nsi/l10n
+      MODE: MAKE
+      TRANSLATION_WRITER_IMAGE: python:2.7-stretch
