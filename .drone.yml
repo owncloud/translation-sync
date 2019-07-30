@@ -397,6 +397,13 @@ matrix:
       REPO_PATH: .
       MODE: OLD
 
+    - REPO_NAME: encryption
+      REPO_URL: https://github.com/owncloud/encryption.git
+      REPO_GIT: git@github.com:owncloud/encryption.git
+      REPO_BRANCH: master
+      REPO_PATH: .
+      MODE: OLD
+
     - REPO_NAME: phoenix
       REPO_URL: https://github.com/owncloud/phoenix.git
       REPO_GIT: git@github.com:owncloud/phoenix.git
