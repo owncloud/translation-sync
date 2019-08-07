@@ -292,13 +292,6 @@ matrix:
       REPO_PATH: .
       MODE: OLD
 
-    - REPO_NAME: gallery
-      REPO_URL: https://github.com/owncloud/gallery.git
-      REPO_GIT: git@github.com:owncloud/gallery.git
-      REPO_BRANCH: master
-      REPO_PATH: .
-      MODE: OLD
-
     - REPO_NAME: guests
       REPO_URL: https://github.com/owncloud/guests.git
       REPO_GIT: git@github.com:owncloud/guests.git
