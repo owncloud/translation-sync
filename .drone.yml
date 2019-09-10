@@ -21,7 +21,7 @@ pipeline:
     pull: true
     secrets: [ tx_token ]
     commands:
-      - tx -d push -s --no-interactive
+      - tx -d push -s --no-interactive --skip
     when:
       event: [ push ]
 
