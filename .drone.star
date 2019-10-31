@@ -101,9 +101,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "ref": ref,
                     "sha": "FETCH_HEAD",
                 },
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # translation-directory
@@ -117,9 +114,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                 "commands": [
                     "mkdir -p '" + path + "/" + sub_path + "'",
                 ] if mode == "old" else ["echo 'noop'"],
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # translation reader
@@ -134,9 +128,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "'",
                     "make l10n-read",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             } if mode == "make" else {
                 "name": "translation-reader-old",
                 "image": "owncloudci/transifex:latest",
@@ -148,9 +139,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "/" + sub_path + "'",
                     "l10n '" + name + "' read",
                 ] if mode == "old" else ["echo 'noop'"],
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # translation push
@@ -165,9 +153,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "'",
                     "make l10n-push",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             } if mode == "make" else {
                 "name": "translation-push-old",
                 "image": "owncloudci/transifex:latest",
@@ -179,9 +164,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "/" + sub_path + "'",
                     "tx -d push -s --skip --no-interactive",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # translation pull
@@ -196,9 +178,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "'",
                     "make l10n-pull",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             } if mode == "make" else {
                 "name": "translation-pull-old",
                 "image": "owncloudci/transifex:latest",
@@ -210,9 +189,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "/" + sub_path + "'",
                     "tx -d pull -a --skip --minimum-perc=75 -f",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # translation writer
@@ -227,9 +203,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "'",
                     "make l10n-write",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             } if mode == "make" else {
                 "name": "translation-writer-old",
                 "image": "owncloudci/transifex:latest",
@@ -241,9 +214,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "/" + sub_path + "'",
                     "l10n '" + name + "' write",
                 ] if mode == "old" else ["echo 'noop'"],
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # cleanup
@@ -258,9 +228,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "cd '" + path + "'",
                     "make l10n-clean",
                 ],
-                "when": {
-                    "event": ["push"],
-                },
             } if mode == "make" else {
                 "name": "translation-cleanup-old",
                 "image": "owncloudci/transifex:latest",
@@ -277,9 +244,6 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "find . -name yo.* -type f  -print0 | xargs -r -0 git rm -f",
                     "find . -name ne.* -type f  -print0 | xargs -r -0 git rm -f",
                 ] if mode == "old" else ["echo 'noop'"],
-                "when": {
-                    "event": ["push"],
-                },
             },
 
             # translation commit
@@ -300,12 +264,10 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "no_verify": True,
                     "path": path,
                 },
-                "when": {
-                    "event": ["push"],
-                },
             },
         ],
         "trigger": {
+            "event": ["push"],
             "ref": [
                 "refs/heads/master",
                 "refs/pull/**",
