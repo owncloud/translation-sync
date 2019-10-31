@@ -306,8 +306,8 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
             },
         ],
         "trigger": {
-            "refs": [
-                "refs/heads/starlark",
+            "ref": [
+                "refs/heads/master",
                 "refs/pull/**",
             ],
         },
