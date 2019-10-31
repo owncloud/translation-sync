@@ -338,7 +338,7 @@ def notification(depends_on = []):
                 },
             },
         ],
-        "when": {
+        "trigger": {
             "event": ["push"],
             "status": ["success", "failure"],
         },
