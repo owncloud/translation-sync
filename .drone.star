@@ -44,6 +44,26 @@ def main(ctx):
             git = "git@github.com:owncloud/OwncloudUniversal.git",
             mode = "old",
         ),
+        repo(
+            name = "ios-app",
+            ref = "translation-sync",
+            mode = "native",
+        ),
+        repo(
+            name = "ios-sdk",
+            ref = "translation-sync",
+            mode = "native",
+        ),
+        repo(
+            name = "ios-old",
+            url = "https://github.com/owncloud/ios.git",
+            git = "git@github.com:owncloud/ios.git",
+            mode = "native",
+        ),
+        repo(
+            name = "android",
+            mode = "native",
+        ),
     ]
 
     repo_pipeline_names = []
@@ -55,6 +75,7 @@ def main(ctx):
 def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
     url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
     git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
+    sub_path = "l10n" if mode == "old" else "."
 
     return {
         "kind": "pipeline",
@@ -94,8 +115,8 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "mkdir -p '" + path + "/l10n'",
-                ],
+                    "mkdir -p '" + path + "/" + sub_path + "'",
+                ] if mode == "old" else ["echo 'noop'"],
                 "when": {
                     "event": ["push"],
                 },
@@ -124,9 +145,9 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/l10n'",
+                    "cd '" + path + "/" + sub_path + "'",
                     "l10n '" + name + "' read",
-                ],
+                ] if mode == "old" else ["echo 'noop'"],
                 "when": {
                     "event": ["push"],
                 },
@@ -155,7 +176,7 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/l10n'",
+                    "cd '" + path + "/" + sub_path + "'",
                     "tx -d push -s --skip --no-interactive",
                 ],
                 "when": {
@@ -186,7 +207,7 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/l10n'",
+                    "cd '" + path + "/" + sub_path + "'",
                     "tx -d pull -a --skip --minimum-perc=75 -f",
                 ],
                 "when": {
@@ -217,9 +238,9 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/l10n'",
+                    "cd '" + path + "/" + sub_path + "'",
                     "l10n '" + name + "' write",
-                ],
+                ] if mode == "old" else ["echo 'noop'"],
                 "when": {
                     "event": ["push"],
                 },
@@ -248,14 +269,14 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/l10n'",
+                    "cd '" + path + "/" + sub_path + "'",
                     "find . -name *.po -type f -delete",
                     "find . -name *.pot -type f -delete",
                     "find . -name or_IN.* -type f  -print0 | xargs -r -0 git rm -f",
                     "find . -name uz.* -type f  -print0 | xargs -r -0 git rm -f",
                     "find . -name yo.* -type f  -print0 | xargs -r -0 git rm -f",
                     "find . -name ne.* -type f  -print0 | xargs -r -0 git rm -f",
-                ],
+                ] if mode == "old" else ["echo 'noop'"],
                 "when": {
                     "event": ["push"],
                 },
