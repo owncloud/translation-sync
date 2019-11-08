@@ -37,12 +37,12 @@ def main(ctx):
         repo(name = "user_ldap", mode = "old"),
         repo(name = "user_management", mode = "old"),
         repo(name = "encryption", mode = "old"),
-        repo(name = "phoenix", mode = "old"),
+        repo(name = "phoenix", mode = "make"),
         repo(
             name = "windows_phone",
             url = "https://github.com/owncloud/OwncloudUniversal.git",
             git = "git@github.com:owncloud/OwncloudUniversal.git",
-            mode = "old",
+            mode = "make",
         ),
         repo(
             name = "ios-app",
