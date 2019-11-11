@@ -267,6 +267,7 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
             },
         ],
         "trigger": {
+            "cron": ["nightly"],
             "event": ["push"],
             "ref": [
                 "refs/heads/master",
@@ -301,6 +302,7 @@ def notification(depends_on = []):
             },
         ],
         "trigger": {
+            "cron": ["nightly"],
             "event": ["push"],
             "status": ["success", "failure"],
         },
