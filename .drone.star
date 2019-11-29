@@ -1,6 +1,6 @@
 def main(ctx):
     repo_pipelines = [
-        repo(name = "core", path = "l10n"),
+        repo(name = "core", sub_path = "l10n"),
         repo(name = "activity", mode = "old"),
         repo(name = "announcementcenter", mode = "old"),
         repo(name = "brute_force_protection", mode = "old"),
@@ -30,7 +30,6 @@ def main(ctx):
             name = "twofactor_privacyidea",
             url = "https://github.com/privacyidea/privacyidea-owncloud-app.git",
             git = "git@github.com:privacyidea/privacyidea-owncloud-app.git",
-            path = "./twofactor_privacyidea",
             mode = "old",
         ),
         repo(name = "twofactor_totp", mode = "old"),
@@ -46,12 +45,12 @@ def main(ctx):
         ),
         repo(
             name = "ios-app",
-            ref = "translation-sync",
+            branch = "translation-sync",
             mode = "native",
         ),
         repo(
             name = "ios-sdk",
-            ref = "translation-sync",
+            branch = "translation-sync",
             mode = "native",
         ),
         repo(
@@ -72,9 +71,10 @@ def main(ctx):
 
     return repo_pipelines + [notification(depends_on = repo_pipeline_names)]
 
-def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
+def repo(name, url = "", git = "", sub_path = ".", branch = "master", mode = "make"):
     url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
     git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
+    path = name
     sub_path = "l10n" if mode == "old" else "."
 
     return {
@@ -89,17 +89,24 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
             "disable": True,
         },
         "steps": [
+            {
+                "name": "wipe-checkout",
+                "image": "plugins/git-action:1",
+                "pull": "always",
+                "commands": [
+                    "rm -rf '" + path + "'",
+                ],
+            },
             # clone
             {
                 "name": "clone",
-                "image": "plugins/git:1",
+                "image": "plugins/git-action:1",
                 "pull": "always",
                 "settings": {
-                    "tags": False,
-                    "recursive": False,
+                    "actions": "clone",
                     "remote": url,
-                    "ref": ref,
-                    "sha": "FETCH_HEAD",
+                    "branch": branch,
+                    "path": path,
                 },
             },
 
@@ -249,28 +256,52 @@ def repo(name, url = "", git = "", path = ".", ref = "master", mode = "make"):
             # translation commit
             {
                 "name": "translation-commit",
-                "image": "appleboy/drone-git-push:latest",
+                "image": "plugins/git-action:latest",
                 "pull": "always",
                 "settings": {
-                    "ssh_key": from_secret("git_push_ssh_key"),
+                    "actions": "commit",
                     "author_name": "ownClouders",
                     "author_email": "devops@owncloud.com",
-                    "remote": git,
-                    "remote_name": "upstream",
-                    "branch": ref,
                     "empty_commit": False,
-                    "commit": True,
-                    "commit_message": "[tx] updated from transifex",
-                    "no_verify": True,
+                    "message": "[tx] updated from transifex",
                     "path": path,
                 },
             },
+            {
+                "name": "show-commit",
+                "image": "plugins/git-action:latest",
+                "pull": "always",
+                "commands": [
+                    "cd '" + path + "'",
+                    "git show -p",
+                ],
+            },
+            whenPush({
+                "name": "switch-remote",
+                "image": "plugins/git-action:latest",
+                "pull": "always",
+                "commands": [
+                    "cd '" + path + "'",
+                    # Use https to clone and git to push - so no ssh_key is needed to test everything but pushing
+                    "git remote rm origin",
+                    "git remote add origin '" + git + "'",
+                ],
+            }),
+            whenPush({
+                "name": "translation-commit-push",
+                "image": "plugins/git-action:latest",
+                "pull": "always",
+                "settings": {
+                    "actions": "push",
+                    "ssh_key": from_secret("git_push_ssh_key"),
+                    "path": path,
+                },
+            }),
         ],
         "trigger": {
             "cron": ["nightly"],
             "ref": [
                 "refs/heads/master",
-                "refs/pull/**",
             ],
         },
     }
@@ -310,3 +341,19 @@ def from_secret(name):
     return {
         "from_secret": name,
     }
+
+def whenPush(dict):
+    if not "when" in dict:
+        dict["when"] = {}
+
+    if not "instance" in dict["when"]:
+        dict["when"]["instance"] = []
+
+    dict["when"]["instance"].append("drone.owncloud.com")
+
+    if not "ref" in dict["when"]:
+        dict["when"]["ref"] = []
+
+    dict["when"]["ref"].append("refs/heads/master")
+
+    return dict
