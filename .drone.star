@@ -28,6 +28,7 @@ def main(ctx):
         repo(name = "twofactor_backup_codes", mode = "old"),
         repo(
             name = "twofactor_privacyidea",
+            sub_path = "twofactor_privacyidea/l10n",
             url = "https://github.com/privacyidea/privacyidea-owncloud-app.git",
             git = "git@github.com:privacyidea/privacyidea-owncloud-app.git",
             mode = "old",
@@ -71,11 +72,11 @@ def main(ctx):
 
     return repo_pipelines + [notification(depends_on = repo_pipeline_names)]
 
-def repo(name, url = "", git = "", sub_path = ".", branch = "master", mode = "make"):
+def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make"):
     url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
     git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
     path = name
-    sub_path = "l10n" if mode == "old" else "."
+    sub_path = sub_path if sub_path != "" else ("l10n" if mode == "old" else ".")
 
     return {
         "kind": "pipeline",
