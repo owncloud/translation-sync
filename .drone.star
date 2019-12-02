@@ -296,6 +296,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "actions": "push",
                     "ssh_key": from_secret("git_push_ssh_key"),
                     "path": path,
+                    "branch": branch,
                 },
             }),
         ],
