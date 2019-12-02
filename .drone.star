@@ -77,7 +77,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
     git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
     path = name
     sub_path = sub_path if sub_path != "" else ("l10n" if mode == "old" else ".")
-
+    work_dir = "%s/%s" % (path, sub_path)
     return {
         "kind": "pipeline",
         "type": "docker",
@@ -95,7 +95,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "image": "plugins/git-action:1",
                 "pull": "always",
                 "commands": [
-                    "rm -rf '" + path + "'",
+                    "rm -rf '%s'" % path,
                 ],
             },
             # clone
@@ -120,7 +120,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "mkdir -p '" + path + "/" + sub_path + "'",
+                    "mkdir -p '%s'" % work_dir,
                 ] if mode == "old" else ["echo 'noop'"],
             },
 
@@ -133,7 +133,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % work_dir,
                     "make l10n-read",
                 ],
             } if mode == "make" else {
@@ -144,7 +144,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/" + sub_path + "'",
+                    "cd '%s'" % work_dir,
                     "l10n '" + name + "' read",
                 ] if mode == "old" else ["echo 'noop'"],
             },
@@ -158,7 +158,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % work_dir,
                     "make l10n-push",
                 ],
             } if mode == "make" else {
@@ -169,7 +169,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/" + sub_path + "'",
+                    "cd '%s'" % work_dir,
                     "tx -d push -s --skip --no-interactive",
                 ],
             },
@@ -183,7 +183,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % work_dir,
                     "make l10n-pull",
                 ],
             } if mode == "make" else {
@@ -194,7 +194,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/" + sub_path + "'",
+                    "cd '%s'" % work_dir,
                     "tx -d pull -a --skip --minimum-perc=75 -f",
                 ],
             },
@@ -208,7 +208,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % work_dir,
                     "make l10n-write",
                 ],
             } if mode == "make" else {
@@ -219,7 +219,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/" + sub_path + "'",
+                    "cd '%s'" % work_dir,
                     "l10n '" + name + "' write",
                 ] if mode == "old" else ["echo 'noop'"],
             },
@@ -233,7 +233,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % work_dir,
                     "make l10n-clean",
                 ],
             } if mode == "make" else {
@@ -244,7 +244,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "TX_TOKEN": from_secret("tx_token"),
                 },
                 "commands": [
-                    "cd '" + path + "/" + sub_path + "'",
+                    "cd '%s'" % work_dir,
                     "find . -name *.po -type f -delete",
                     "find . -name *.pot -type f -delete",
                     "find . -name or_IN.* -type f  -print0 | xargs -r -0 git rm -f",
@@ -273,7 +273,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "image": "plugins/git-action:latest",
                 "pull": "always",
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % path,
                     "git show -p",
                 ],
             },
@@ -282,7 +282,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "image": "plugins/git-action:latest",
                 "pull": "always",
                 "commands": [
-                    "cd '" + path + "'",
+                    "cd '%s'" % path,
                     # Use https to clone and git to push - so no ssh_key is needed to test everything but pushing
                     "git remote rm origin",
                     "git remote add origin '" + git + "'",
