@@ -34,7 +34,6 @@ def main(ctx):
         ),
         repo(name = "twofactor_totp", mode = "old"),
         repo(name = "user_ldap", mode = "old"),
-        repo(name = "user_management", mode = "old"),
         repo(name = "encryption", mode = "old"),
         repo(name = "phoenix", mode = "make"),
         repo(
