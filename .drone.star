@@ -140,7 +140,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
             },
 
             # translation push
-            {
+            whenPush({
                 "name": "translation-push",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
@@ -162,7 +162,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "cd '%s'" % work_dir,
                     "tx -d push -s --skip --no-interactive",
                 ],
-            },
+            }),
 
             # translation pull
             {
@@ -279,9 +279,8 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
             }),
         ],
         "trigger": {
-            "cron": ["nightly"],
             "ref": [
-                "refs/heads/master",
+                "refs/heads/**",
             ],
         },
     }
@@ -312,7 +311,9 @@ def notification(depends_on = []):
             },
         ],
         "trigger": {
-            "cron": ["nightly"],
+            "ref": [
+                "refs/heads/**",
+            ],
             "status": ["success", "failure"],
         },
     }
