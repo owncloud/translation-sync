@@ -115,9 +115,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-directory",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "mkdir -p '%s'" % work_dir,
                 ] if mode == "old" else ["echo 'noop'"],
@@ -128,9 +125,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-reader",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "cd '%s'" % work_dir,
                     "make l10n-read",
@@ -139,9 +133,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-reader-old",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "cd '%s'" % work_dir,
                     "l10n '" + name + "' read",
@@ -149,7 +140,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
             },
 
             # translation push
-            {
+            whenPush({
                 "name": "translation-push",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
@@ -171,7 +162,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "cd '%s'" % work_dir,
                     "tx -d push -s --skip --no-interactive",
                 ],
-            },
+            }),
 
             # translation pull
             {
@@ -203,9 +194,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-writer",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "cd '%s'" % work_dir,
                     "make l10n-write",
@@ -214,9 +202,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-writer-old",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "cd '%s'" % work_dir,
                     "l10n '" + name + "' write",
@@ -228,9 +213,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-cleanup",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "cd '%s'" % work_dir,
                     "make l10n-clean",
@@ -239,9 +221,6 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-cleanup-old",
                 "image": "owncloudci/transifex:latest",
                 "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
                 "commands": [
                     "cd '%s'" % work_dir,
                     "find . -name *.po -type f -delete",
@@ -300,9 +279,8 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
             }),
         ],
         "trigger": {
-            "cron": ["nightly"],
             "ref": [
-                "refs/heads/master",
+                "refs/heads/**",
             ],
         },
     }
@@ -333,7 +311,9 @@ def notification(depends_on = []):
             },
         ],
         "trigger": {
-            "cron": ["nightly"],
+            "ref": [
+                "refs/heads/**",
+            ],
             "status": ["success", "failure"],
         },
     }
