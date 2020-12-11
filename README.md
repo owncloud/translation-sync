@@ -9,8 +9,8 @@ Within this repository we define a DroneCI configuration to sync Transifex trans
 You can test the synchronisation of translations for a specific repo by cloning the repo into your checkout of this repo and running `drone exec` like this:
 
 ```
-git clone https://github.com/owncloud/phoenix.git
-TX_TOKEN=... REPO_NAME=owncloud_universal REPO_URL=https://github.com/owncloud/phoenix.git REPO_GIT=git@github.com:owncloud/phoenix.git REPO_BRANCH=master REPO_PATH=phoenix MODE=MAKE drone exec --local --build-event push
+git clone https://github.com/owncloud/web.git
+TX_TOKEN=... REPO_NAME=owncloud_universal REPO_URL=https://github.com/owncloud/web.git REPO_GIT=git@github.com:owncloud/web.git REPO_BRANCH=master REPO_PATH=web MODE=MAKE drone exec --local --build-event push
 ```
 
 The trick is to prepend the folder to which the repo was cloned to the `REPO_PATH`.
