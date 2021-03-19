@@ -17,6 +17,7 @@ def main(ctx):
         repo(name = "files_primary_s3", mode = "make"),
         repo(name = "files_mediaviewer", mode = "make"),
         repo(name = "files_texteditor", mode = "old"),
+        repo(name = "files_pdfviewer", mode = "make"),
         repo(name = "firstrunwizard", mode = "old"),
         repo(name = "guests", mode = "old"),
         repo(name = "impersonate", mode = "old"),
