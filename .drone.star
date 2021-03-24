@@ -40,6 +40,7 @@ def main(ctx):
         repo(name = "twofactor_totp", mode = "old"),
         repo(name = "user_ldap", mode = "old"),
         repo(name = "encryption", mode = "old"),
+        repo(name = "ocis", mode = "make"),
         repo(name = "web", mode = "make"),
         repo(
             name = "windows_phone",
