@@ -1,6 +1,7 @@
 def main(ctx):
     repo_pipelines = [
         repo(name = "core", sub_path = "l10n"),
+        repo(name = "msofba", mode = "make"),
         repo(name = "activity", mode = "old"),
         repo(name = "announcementcenter", mode = "old"),
         repo(name = "brute_force_protection", mode = "old"),
