@@ -288,7 +288,8 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                     "drone-git-action --actions commit --empty-commit",
                     "echo $PLUGIN_AUTHOR_NAME",
                     "echo $PLUGIN_AUTHOR_EMAIL",
-                    "git config --info",
+                    "git config --list",
+                    "git show -p"
                 ],
                 "settings": {
                     "actions": "commit",
