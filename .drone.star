@@ -283,6 +283,13 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                 "name": "translation-commit",
                 "image": "plugins/git-action:latest",
                 "pull": "always",
+                "commands": [
+                    "cd '%s'" % path,
+                    "drone-git-action --actions commit --empty-commit",
+                    "echo $PLUGIN_AUTHOR_NAME",
+                    "echo $PLUGIN_AUTHOR_EMAIL",
+                    "git config --info",
+                ],
                 "settings": {
                     "actions": "commit",
                     "commit_author": "ownClouders",
