@@ -326,8 +326,7 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
         ],
         "trigger": {
             "ref": [
-                "refs/heads/master",
-                'refs/pull/**',
+                "refs/heads/**",
             ],
         },
     }
@@ -367,7 +366,7 @@ def notification(depends_on=[]):
         ],
         "trigger": {
             "ref": [
-                "refs/heads/master",
+                "refs/heads/**",
             ],
             "status": ["success", "failure"],
         },
