@@ -268,6 +268,7 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                 "image": "owncloudci/alpine",
                 "pull": "always",
                 "commands": [
+                    "git config --list",
                     "echo $DRONE_COMMIT_AUTHOR",
                     "echo $DRONE_COMMIT_AUTHOR_EMAIL",
                     "echo $DRONE_NETRC_USERNAME"
