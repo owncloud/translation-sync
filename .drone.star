@@ -269,10 +269,9 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                 "pull": "always",
                 "settings": {
                     "actions": "commit",
-                    "empty_commit": True,
                     "author_name": "ownClouders",
                     "author_email": "devops@owncloud.com",
-                    "empty_commit": False,
+                    "empty_commit": True,
                     "message": "[tx] updated from transifex",
                     "path": path,
                 },
