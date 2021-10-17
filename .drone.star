@@ -1,74 +1,74 @@
 def main(ctx):
     repo_pipelines = [
-        repo(name = "core", sub_path = "l10n"),
-        repo(name = "activity", mode = "old"),
-        repo(name = "announcementcenter", mode = "old"),
-        repo(name = "brute_force_protection", mode = "old"),
-        repo(name = "calendar", mode = "old"),
-        repo(name = "contacts", mode = "old"),
-        repo(name = "customgroups", mode = "old"),
-        repo(name = "diagnostics", mode = "old"),
-        repo(name = "external", mode = "old"),
-        repo(name = "file-picker", mode = "make"),
-        repo(name = "files_antivirus", mode = "old"),
-        repo(name = "files_external_dropbox", mode = "old"),
-        repo(name = "files_external_ftp", mode = "old"),
-        repo(name = "files_external_gdrive", mode = "old"),
-        repo(name = "files_paperhive", mode = "old"),
-        repo(name = "files_primary_s3", mode = "make"),
-        repo(name = "files_mediaviewer", mode = "make"),
-        repo(name = "files_texteditor", mode = "old"),
-        repo(name = "files_pdfviewer", mode = "make"),
-        repo(name = "firstrunwizard", mode = "old"),
-        repo(name = "guests", mode = "old"),
-        repo(name = "impersonate", mode = "old"),
-        repo(name = "notes", mode = "old"),
-        repo(name = "notifications", mode = "old"),
-        repo(name = "oauth2", mode = "old"),
-        repo(name = "owncloud-design-system", mode = "make"),
-        repo(name = "password_policy", mode = "old"),
-        repo(name = "richdocuments", mode = "old"),
-        repo(name = "tasks", mode = "old"),
-        repo(name = "templateeditor", mode = "old"),
-        repo(name = "twofactor_backup_codes", mode = "old"),
+        repo(name="core", sub_path="l10n"),
+        repo(name="activity", mode="old"),
+        repo(name="announcementcenter", mode="old"),
+        repo(name="brute_force_protection", mode="old"),
+        repo(name="calendar", mode="old"),
+        repo(name="contacts", mode="old"),
+        repo(name="customgroups", mode="old"),
+        repo(name="diagnostics", mode="old"),
+        repo(name="external", mode="old"),
+        repo(name="file-picker", mode="make"),
+        repo(name="files_antivirus", mode="old"),
+        repo(name="files_external_dropbox", mode="old"),
+        repo(name="files_external_ftp", mode="old"),
+        repo(name="files_external_gdrive", mode="old"),
+        repo(name="files_paperhive", mode="old"),
+        repo(name="files_primary_s3", mode="make"),
+        repo(name="files_mediaviewer", mode="make"),
+        repo(name="files_texteditor", mode="old"),
+        repo(name="files_pdfviewer", mode="make"),
+        repo(name="firstrunwizard", mode="old"),
+        repo(name="guests", mode="old"),
+        repo(name="impersonate", mode="old"),
+        repo(name="notes", mode="old"),
+        repo(name="notifications", mode="old"),
+        repo(name="oauth2", mode="old"),
+        repo(name="owncloud-design-system", mode="make"),
+        repo(name="password_policy", mode="old"),
+        repo(name="richdocuments", mode="old"),
+        repo(name="tasks", mode="old"),
+        repo(name="templateeditor", mode="old"),
+        repo(name="twofactor_backup_codes", mode="old"),
         repo(
-            name = "twofactor_privacyidea",
-            sub_path = "twofactor_privacyidea/l10n",
-            url = "https://github.com/privacyidea/privacyidea-owncloud-app.git",
-            git = "git@github.com:privacyidea/privacyidea-owncloud-app.git",
-            mode = "old",
+            name="twofactor_privacyidea",
+            sub_path="twofactor_privacyidea/l10n",
+            url="https://github.com/privacyidea/privacyidea-owncloud-app.git",
+            git="git@github.com:privacyidea/privacyidea-owncloud-app.git",
+            mode="old",
         ),
-        repo(name = "twofactor_totp", mode = "old"),
-        repo(name = "user_ldap", mode = "old"),
-        repo(name = "encryption", mode = "old"),
-        repo(name = "ocis", mode = "make"),
-        repo(name = "qnap", mode = "make"),
-        repo(name = "web", mode = "make"),
+        repo(name="twofactor_totp", mode="old"),
+        repo(name="user_ldap", mode="old"),
+        repo(name="encryption", mode="old"),
+        repo(name="ocis", mode="make"),
+        repo(name="qnap", mode="make"),
+        repo(name="web", mode="make"),
         repo(
-            name = "windows_phone",
-            url = "https://github.com/owncloud/OwncloudUniversal.git",
-            git = "git@github.com:owncloud/OwncloudUniversal.git",
-            mode = "make",
-        ),
-        repo(
-            name = "ios-app",
-            branch = "translation-sync",
-            mode = "native",
+            name="windows_phone",
+            url="https://github.com/owncloud/OwncloudUniversal.git",
+            git="git@github.com:owncloud/OwncloudUniversal.git",
+            mode="make",
         ),
         repo(
-            name = "ios-sdk",
-            branch = "translation-sync",
-            mode = "native",
+            name="ios-app",
+            branch="translation-sync",
+            mode="native",
         ),
         repo(
-            name = "ios-old",
-            url = "https://github.com/owncloud/ios.git",
-            git = "git@github.com:owncloud/ios.git",
-            mode = "native",
+            name="ios-sdk",
+            branch="translation-sync",
+            mode="native",
         ),
         repo(
-            name = "android",
-            mode = "native",
+            name="ios-old",
+            url="https://github.com/owncloud/ios.git",
+            git="git@github.com:owncloud/ios.git",
+            mode="native",
+        ),
+        repo(
+            name="android",
+            mode="native",
         ),
     ]
 
@@ -76,18 +76,23 @@ def main(ctx):
     for repo_pipeline in repo_pipelines:
         repo_pipeline_names.append(repo_pipeline["name"])
 
-    return repo_pipelines + [notification(depends_on = repo_pipeline_names)]
+    return repo_pipelines + [notification(depends_on=repo_pipeline_names)]
 
-def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make"):
+
+def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
     url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
     git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
     path = name
-    sub_path = sub_path if sub_path != "" else ("l10n" if mode == "old" else ".")
+    sub_path = sub_path if sub_path != "" else (
+        "l10n" if mode == "old" else ".")
     work_dir = "%s/%s" % (path, sub_path)
     return {
-        "kind": "pipeline",
-        "type": "docker",
-        "name": name,
+        "kind":
+        "pipeline",
+        "type":
+        "docker",
+        "name":
+        name,
         "platform": {
             "os": "linux",
             "arch": "amd64",
@@ -119,9 +124,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
 
             # translation-directory
             {
-                "name": "translation-directory",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
+                "name":
+                "translation-directory",
+                "image":
+                "owncloudci/transifex:latest",
+                "pull":
+                "always",
                 "commands": [
                     "mkdir -p '%s'" % work_dir,
                 ] if mode == "old" else ["echo 'noop'"],
@@ -137,9 +145,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "make l10n-read",
                 ],
             } if mode == "make" else {
-                "name": "translation-reader-old",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
+                "name":
+                "translation-reader-old",
+                "image":
+                "owncloudci/transifex:latest",
+                "pull":
+                "always",
                 "commands": [
                     "cd '%s'" % work_dir,
                     "l10n '" + name + "' read",
@@ -159,9 +170,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "make l10n-push",
                 ],
             } if mode == "make" else {
-                "name": "translation-push-old",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
+                "name":
+                "translation-push-old",
+                "image":
+                "owncloudci/transifex:latest",
+                "pull":
+                "always",
                 "environment": {
                     "TX_TOKEN": from_secret("tx_token"),
                 },
@@ -184,9 +198,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "make l10n-pull",
                 ],
             } if mode == "make" else {
-                "name": "translation-pull-old",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
+                "name":
+                "translation-pull-old",
+                "image":
+                "owncloudci/transifex:latest",
+                "pull":
+                "always",
                 "environment": {
                     "TX_TOKEN": from_secret("tx_token"),
                 },
@@ -206,9 +223,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "make l10n-write",
                 ],
             } if mode == "make" else {
-                "name": "translation-writer-old",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
+                "name":
+                "translation-writer-old",
+                "image":
+                "owncloudci/transifex:latest",
+                "pull":
+                "always",
                 "commands": [
                     "cd '%s'" % work_dir,
                     "l10n '" + name + "' write",
@@ -225,9 +245,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "make l10n-clean",
                 ],
             } if mode == "make" else {
-                "name": "translation-cleanup-old",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
+                "name":
+                "translation-cleanup-old",
+                "image":
+                "owncloudci/transifex:latest",
+                "pull":
+                "always",
                 "commands": [
                     "cd '%s'" % work_dir,
                     "find . -name *.po -type f -delete",
@@ -264,9 +287,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 ],
             },
             whenPush({
-                "name": "switch-remote",
-                "image": "plugins/git-action:latest",
-                "pull": "always",
+                "name":
+                "switch-remote",
+                "image":
+                "plugins/git-action:latest",
+                "pull":
+                "always",
                 "commands": [
                     "cd '%s'" % path,
                     # Use https to clone and git to push - so no ssh_key is needed to test everything but pushing
@@ -289,15 +315,20 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
         "trigger": {
             "ref": [
                 "refs/heads/**",
+                'refs/pull/**',
             ],
         },
     }
 
-def notification(depends_on = []):
+
+def notification(depends_on=[]):
     return {
-        "kind": "pipeline",
-        "type": "docker",
-        "name": "notification",
+        "kind":
+        "pipeline",
+        "type":
+        "docker",
+        "name":
+        "notification",
         "platform": {
             "os": "linux",
             "arch": "amd64",
@@ -305,16 +336,20 @@ def notification(depends_on = []):
         "clone": {
             "disable": True,
         },
-        "depends_on": depends_on,
+        "depends_on":
+        depends_on,
         "steps": [
             {
                 "name": "rocketchat",
                 "image": "plugins/slack:1",
                 "pull": "always",
                 "settings": {
-                    "webhook": from_secret("slack_webhook"),
-                    "channel": "server",
-                    "template": "*{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}>",
+                    "webhook":
+                    from_secret("slack_webhook"),
+                    "channel":
+                    "server",
+                    "template":
+                    "*{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}>",
                 },
             },
         ],
@@ -326,10 +361,12 @@ def notification(depends_on = []):
         },
     }
 
+
 def from_secret(name):
     return {
         "from_secret": name,
     }
+
 
 def whenPush(dict):
     if not "when" in dict:
