@@ -93,6 +93,9 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
         "docker",
         "name":
         name,
+        "environment": {
+            "DRONE_COMMIT_AUTHOR": "ownClouders",
+        },
         "platform": {
             "os": "linux",
             "arch": "amd64",
@@ -264,12 +267,14 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
 
             # translation commit
             {
-                "name": "debug",
-                "image": "owncloudci/alpine",
-                "pull": "always",
+                "name":
+                "debug",
+                "image":
+                "owncloudci/alpine",
+                "pull":
+                "always",
                 "commands": [
-                    "git config --list",
-                    "echo $DRONE_COMMIT_AUTHOR",
+                    "git config --list", "echo $DRONE_COMMIT_AUTHOR",
                     "echo $DRONE_COMMIT_AUTHOR_EMAIL",
                     "echo $DRONE_NETRC_USERNAME"
                 ],
