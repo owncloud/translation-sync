@@ -288,6 +288,10 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                     "drone-git-action --actions commit --empty-commit",
                     "echo $PLUGIN_AUTHOR_NAME",
                     "echo $PLUGIN_AUTHOR_EMAIL",
+                    "echo $GIT_AUTHOR_NAME",
+                    "echo $GIT_AUTHOR_EMAIL",
+                    "echo $GIT_COMMITTER_NAME",
+                    "echo $GIT_COMMITTER_EMAIL",
                     "git config --list",
                     "git show -p"
                 ],
@@ -379,7 +383,7 @@ def notification(depends_on=[]):
         ],
         "trigger": {
             "ref": [
-                "refs/heads/**",
+                "refs/heads/master",
             ],
             "status": ["success", "failure"],
         },
