@@ -135,139 +135,143 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                 ] if mode == "old" else ["echo 'noop'"],
             },
 
-            # translation reader
-            {
-                "name": "translation-reader",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "make l10n-read",
-                ],
-            } if mode == "make" else {
-                "name":
-                "translation-reader-old",
-                "image":
-                "owncloudci/transifex:latest",
-                "pull":
-                "always",
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "l10n '" + name + "' read",
-                ] if mode == "old" else ["echo 'noop'"],
-            },
+            # # translation reader
+            # {
+            #     "name": "translation-reader",
+            #     "image": "owncloudci/transifex:latest",
+            #     "pull": "always",
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "make l10n-read",
+            #     ],
+            # } if mode == "make" else {
+            #     "name":
+            #     "translation-reader-old",
+            #     "image":
+            #     "owncloudci/transifex:latest",
+            #     "pull":
+            #     "always",
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "l10n '" + name + "' read",
+            #     ] if mode == "old" else ["echo 'noop'"],
+            # },
 
-            # translation push
-            whenPush({
-                "name": "translation-push",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "make l10n-push",
-                ],
-            } if mode == "make" else {
-                "name":
-                "translation-push-old",
-                "image":
-                "owncloudci/transifex:latest",
-                "pull":
-                "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "tx -d push -s --skip --no-interactive",
-                ],
-            }),
+            # # translation push
+            # whenPush({
+            #     "name": "translation-push",
+            #     "image": "owncloudci/transifex:latest",
+            #     "pull": "always",
+            #     "environment": {
+            #         "TX_TOKEN": from_secret("tx_token"),
+            #     },
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "make l10n-push",
+            #     ],
+            # } if mode == "make" else {
+            #     "name":
+            #     "translation-push-old",
+            #     "image":
+            #     "owncloudci/transifex:latest",
+            #     "pull":
+            #     "always",
+            #     "environment": {
+            #         "TX_TOKEN": from_secret("tx_token"),
+            #     },
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "tx -d push -s --skip --no-interactive",
+            #     ],
+            # }),
 
-            # translation pull
-            {
-                "name": "translation-pull",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "make l10n-pull",
-                ],
-            } if mode == "make" else {
-                "name":
-                "translation-pull-old",
-                "image":
-                "owncloudci/transifex:latest",
-                "pull":
-                "always",
-                "environment": {
-                    "TX_TOKEN": from_secret("tx_token"),
-                },
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "tx -d pull -a --skip --minimum-perc=75 -f",
-                ],
-            },
+            # # translation pull
+            # {
+            #     "name": "translation-pull",
+            #     "image": "owncloudci/transifex:latest",
+            #     "pull": "always",
+            #     "environment": {
+            #         "TX_TOKEN": from_secret("tx_token"),
+            #     },
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "make l10n-pull",
+            #     ],
+            # } if mode == "make" else {
+            #     "name":
+            #     "translation-pull-old",
+            #     "image":
+            #     "owncloudci/transifex:latest",
+            #     "pull":
+            #     "always",
+            #     "environment": {
+            #         "TX_TOKEN": from_secret("tx_token"),
+            #     },
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "tx -d pull -a --skip --minimum-perc=75 -f",
+            #     ],
+            # },
 
-            # translation writer
-            {
-                "name": "translation-writer",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "make l10n-write",
-                ],
-            } if mode == "make" else {
-                "name":
-                "translation-writer-old",
-                "image":
-                "owncloudci/transifex:latest",
-                "pull":
-                "always",
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "l10n '" + name + "' write",
-                ] if mode == "old" else ["echo 'noop'"],
-            },
+            # # translation writer
+            # {
+            #     "name": "translation-writer",
+            #     "image": "owncloudci/transifex:latest",
+            #     "pull": "always",
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "make l10n-write",
+            #     ],
+            # } if mode == "make" else {
+            #     "name":
+            #     "translation-writer-old",
+            #     "image":
+            #     "owncloudci/transifex:latest",
+            #     "pull":
+            #     "always",
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "l10n '" + name + "' write",
+            #     ] if mode == "old" else ["echo 'noop'"],
+            # },
 
-            # cleanup
-            {
-                "name": "translation-cleanup",
-                "image": "owncloudci/transifex:latest",
-                "pull": "always",
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "make l10n-clean",
-                ],
-            } if mode == "make" else {
-                "name":
-                "translation-cleanup-old",
-                "image":
-                "owncloudci/transifex:latest",
-                "pull":
-                "always",
-                "commands": [
-                    "cd '%s'" % work_dir,
-                    "find . -name *.po -type f -delete",
-                    "find . -name *.pot -type f -delete",
-                    "find . -name or_IN.* -type f  -print0 | xargs -r -0 git rm -f",
-                    "find . -name uz.* -type f  -print0 | xargs -r -0 git rm -f",
-                    "find . -name yo.* -type f  -print0 | xargs -r -0 git rm -f",
-                    "find . -name ne.* -type f  -print0 | xargs -r -0 git rm -f",
-                ] if mode == "old" else ["echo 'noop'"],
-            },
+            # # cleanup
+            # {
+            #     "name": "translation-cleanup",
+            #     "image": "owncloudci/transifex:latest",
+            #     "pull": "always",
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "make l10n-clean",
+            #     ],
+            # } if mode == "make" else {
+            #     "name":
+            #     "translation-cleanup-old",
+            #     "image":
+            #     "owncloudci/transifex:latest",
+            #     "pull":
+            #     "always",
+            #     "commands": [
+            #         "cd '%s'" % work_dir,
+            #         "find . -name *.po -type f -delete",
+            #         "find . -name *.pot -type f -delete",
+            #         "find . -name or_IN.* -type f  -print0 | xargs -r -0 git rm -f",
+            #         "find . -name uz.* -type f  -print0 | xargs -r -0 git rm -f",
+            #         "find . -name yo.* -type f  -print0 | xargs -r -0 git rm -f",
+            #         "find . -name ne.* -type f  -print0 | xargs -r -0 git rm -f",
+            #     ] if mode == "old" else ["echo 'noop'"],
+            # },
 
             # translation commit
             {
                 "name": "debug",
                 "image": "owncloudci/alpine",
                 "pull": "always",
-                "commands": ["echo $DRONE_COMMIT_AUTHOR_NAME"],
+                "commands": [
+                    "echo $DRONE_COMMIT_AUTHOR",
+                    "echo $DRONE_COMMIT_AUTHOR_EMAIL",
+                    "echo $DRONE_NETRC_USERNAME"
+                ],
             },
             {
                 "name": "translation-commit",
