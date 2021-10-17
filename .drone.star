@@ -269,6 +269,8 @@ def repo(name, url="", git="", sub_path="", branch="master", mode="make"):
                 "pull": "always",
                 "settings": {
                     "actions": "commit",
+                    "commit_author": "ownClouders",
+                    "commit_author_email": "devops@owncloud.com",
                     "author_name": "ownClouders",
                     "author_email": "devops@owncloud.com",
                     "empty_commit": True,
