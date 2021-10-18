@@ -244,6 +244,12 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 "name": "translation-commit",
                 "image": "plugins/git-action:latest",
                 "pull": "always",
+                "environment": {
+                    "GIT_AUTHOR_NAME": "",
+                    "GIT_AUTHOR_EMAIL": "",
+                    "GIT_COMMITTER_NAME": "",
+                    "GIT_COMMITTER_EMAIL": "",
+                },
                 "settings": {
                     "actions": "commit",
                     "author_name": "ownClouders",
