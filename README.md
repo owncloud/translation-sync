@@ -8,6 +8,34 @@ Within this repository we define a DroneCI configuration to sync Transifex trans
 
 You can test the synchronisation of translations for a specific repo by cloning the repo into your checkout of this repo and running `drone exec` like this:
 
+## Pull new translations for the guests apps.
+Normally the pull is done every 24h automatically. You can do the pull manually with
+
+```
+app=guests
+grep $app .drone.star
+        repo(name = "guests", mode = "old"),
+```
+If the mode is old, then
+```
+git clone git@github.com/owncloud/$app
+cd $app
+export TX_TOKEN=...
+tx -d pull -a --skip --minimum-perc=75 -f
+# Now we have many subdirectories with *.po files. The l10n script in owncloud-ci/transifex creates *.js and *.json from there.
+txdockerrun() { docker run -ti -v $(pwd):/mnt -w /mnt --entrypoint=/bin/bash owncloudci/transifex:latest -c "set -x; $@"; }
+txdockerrun "cd l10n; l10n '$app' write"
+
+find . -name *.po -type f -delete
+rmdir ?? ??_??
+
+# review the changes
+git diff
+```
+
+
+## Push translations for web
+
 ```
 git clone https://github.com/owncloud/web.git
 TX_TOKEN=... REPO_NAME=owncloud_universal REPO_URL=https://github.com/owncloud/web.git REPO_GIT=git@github.com:owncloud/web.git REPO_BRANCH=master REPO_PATH=web MODE=MAKE drone exec --local --build-event push
