@@ -172,7 +172,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 },
                 "commands": [
                     "cd '%s'" % work_dir,
-                    "tx -d push -s --skip --no-interactive",
+                    "tx push -s --skip",
                 ],
             }),
 
@@ -197,7 +197,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 },
                 "commands": [
                     "cd '%s'" % work_dir,
-                    "tx -d pull -a --skip --minimum-perc=75 -f",
+                    "tx pull -a --skip --minimum-perc=75 -f",
                 ],
             },
 
