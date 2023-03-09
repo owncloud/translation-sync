@@ -49,7 +49,6 @@ def main(ctx):
         repo(name = "qnap", mode = "make"),
         repo(name = "openidconnect", mode = "make"),
         repo(name = "web", mode = "make"),
-        repo(name = "ocis", mode = "make"),
         repo(
             name = "windows_phone",
             url = "https://github.com/owncloud/OwncloudUniversal.git",
