@@ -8,6 +8,7 @@ def main(ctx):
         repo(name = "contacts", mode = "old"),
         repo(name = "customgroups", mode = "old"),
         repo(name = "diagnostics", mode = "old"),
+        repo(name = "drawio", mode = "old"),
         repo(name = "external", mode = "old"),
         repo(name = "file-picker", mode = "make"),
         repo(name = "files_antivirus", mode = "old"),
