@@ -67,12 +67,6 @@ def main(ctx):
             mode = "native",
         ),
         repo(
-            name = "ios-old",
-            url = "https://github.com/owncloud/ios.git",
-            git = "git@github.com:owncloud/ios.git",
-            mode = "native",
-        ),
-        repo(
             name = "android",
             mode = "native",
         ),
