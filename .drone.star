@@ -317,15 +317,16 @@ def notification(depends_on = []):
                 "image": "plugins/slack:1",
                 "pull": "always",
                 "settings": {
-                    "webhook": from_secret("slack_webhook"),
-                    "channel": "server",
-                    "template": "*{{build.status}}* <{{build.link}}|{{repo.owner}}/{{repo.name}}#{{truncate build.commit 8}}>",
+                    "webhook": {
+                        "from_secret": "rocketchat_chat_webhook",
+                    },
+                    "channel": "builds",
                 },
             },
         ],
         "trigger": {
             "ref": [
-                "refs/heads/**",
+                "refs/heads/master",
             ],
             "status": ["success", "failure"],
         },
