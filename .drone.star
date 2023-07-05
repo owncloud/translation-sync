@@ -293,7 +293,9 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
         ],
         "trigger": {
             "ref": [
-                "refs/heads/**",
+                "refs/heads/master",
+                "refs/tags/**",
+                "refs/pull/**",
             ],
         },
     }
