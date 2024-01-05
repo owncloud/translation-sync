@@ -132,8 +132,8 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 },
                 "commands": [
                     "cd '%s'" % work_dir,
-                    "npm install --silent --global --force \"$(jq -r '.packageManager' < package.json)\"",
-                    "pnpm config set store-dir ./.pnpm-store",
+                    "npm install --silent --global --force \"$(jq -r '.packageManager' < package.json)\";" +
+                    "pnpm config set store-dir ./.pnpm-store;" +
                     "pnpm install" if path == "web" else "",
                     "make l10n-read",
                 ],
