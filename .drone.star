@@ -26,11 +26,6 @@ def main(ctx):
         repo(name = "notes", mode = "old"),
         repo(name = "notifications", mode = "old"),
         repo(name = "oauth2", mode = "old"),
-        repo(
-            name = "owncloud-design-system",
-            branch = "stable-14.0",
-            mode = "make",
-        ),
         repo(name = "password_policy", mode = "old"),
         repo(name = "richdocuments", mode = "old"),
         repo(name = "tasks", mode = "old"),
@@ -137,8 +132,8 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                 },
                 "commands": [
                     "cd '%s'" % work_dir,
-                    "npm install --silent --global --force \"$(jq -r '.packageManager' < package.json)\";" + \
-                    "pnpm config set store-dir ./.pnpm-store;" + \
+                    "npm install --silent --global --force \"$(jq -r '.packageManager' < package.json)\"",
+                    "pnpm config set store-dir ./.pnpm-store",
                     "pnpm install" if path == "web" else "",
                     "make l10n-read",
                 ],
