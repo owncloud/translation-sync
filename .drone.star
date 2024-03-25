@@ -318,7 +318,7 @@ def notification(depends_on = []):
                 "pull": "always",
                 "settings": {
                     "webhook": {
-                        "from_secret": "rocketchat_chat_webhook",
+                        "from_secret": "rocketchat_talk_webhook",
                     },
                     "channel": "builds",
                 },
