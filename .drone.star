@@ -51,16 +51,6 @@ def main(ctx):
             mode = "make",
         ),
         repo(
-            name = "ios-app",
-            branch = "translation-sync",
-            mode = "native",
-        ),
-        repo(
-            name = "ios-sdk",
-            branch = "translation-sync",
-            mode = "native",
-        ),
-        repo(
             name = "android",
             mode = "native",
         ),
