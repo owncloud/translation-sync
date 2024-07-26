@@ -45,12 +45,6 @@ def main(ctx):
         repo(name = "openidconnect", mode = "make"),
         repo(name = "web", mode = "make"),
         repo(
-            name = "windows_phone",
-            url = "https://github.com/owncloud/OwncloudUniversal.git",
-            git = "git@github.com:owncloud/OwncloudUniversal.git",
-            mode = "make",
-        ),
-        repo(
             name = "android",
             mode = "native",
         ),
