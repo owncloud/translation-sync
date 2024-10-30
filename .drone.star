@@ -44,6 +44,7 @@ def main(ctx):
         repo(name = "qnap", mode = "make"),
         repo(name = "openidconnect", mode = "make"),
         repo(name = "web", mode = "make"),
+        repo(name = "web-extensions", mode = "make", branch = "main"),
         repo(
             name = "android",
             mode = "native",
