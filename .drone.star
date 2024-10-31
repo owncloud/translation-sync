@@ -43,8 +43,8 @@ def main(ctx):
         repo(name = "ocis", mode = "make"),
         repo(name = "qnap", mode = "make"),
         repo(name = "openidconnect", mode = "make"),
-        repo(name = "web", mode = "make"),
-        repo(name = "web-extensions", mode = "make", branch = "main"),
+        repo(name = "web", mode = "make", package_manager = "pnpm"),
+        repo(name = "web-extensions", mode = "make", branch = "main", package_manager = "pnpm"),
         repo(
             name = "android",
             mode = "native",
@@ -57,7 +57,7 @@ def main(ctx):
 
     return repo_pipelines + [notification(depends_on = repo_pipeline_names)]
 
-def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make"):
+def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make", package_manager = "npm"):
     url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
     git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
     path = name
@@ -118,7 +118,7 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
                     "cd '%s'" % work_dir,
                     "npm install --silent --global --force \"$(jq -r '.packageManager' < package.json)\";" +
                     "pnpm config set store-dir ./.pnpm-store;" +
-                    "pnpm install" if path == "web" else "",
+                    "pnpm install" if package_manager == "pnpm" else "",
                     "make l10n-read",
                 ],
             } if mode == "make" else {
