@@ -291,21 +291,19 @@ def notification(depends_on = []):
             "os": "linux",
             "arch": "amd64",
         },
-        "clone": {
-            "disable": True,
-        },
         "depends_on": depends_on,
         "steps": [
             {
-                "name": "rocketchat",
-                "image": "plugins/slack:1",
-                "pull": "always",
-                "settings": {
-                    "webhook": {
-                        "from_secret": "rocketchat_talk_webhook",
+                "name": "notify-matrix",
+                "image": "owncloudci/alpine:latest",
+                "environment": {
+                    "MATRIX_TOKEN": {
+                        "from_secret": "matrix_token",
                     },
-                    "channel": "builds",
                 },
+                "commands": [
+                    "bash /drone/src/config/drone/notification.sh",
+                ],
             },
         ],
         "trigger": {
