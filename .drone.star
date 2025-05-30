@@ -54,7 +54,7 @@ def main(ctx):
     for repo_pipeline in repo_pipelines:
         repo_pipeline_names.append(repo_pipeline["name"])
 
-    return repo_pipelines + [notification(depends_on = repo_pipeline_names)]
+    return repo_pipelines + [notification(ctx, depends_on = repo_pipeline_names)]
 
 def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make", package_manager = "npm"):
     url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
@@ -282,7 +282,10 @@ def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "mak
         },
     }
 
-def notification(depends_on = []):
+def notification(ctx, depends_on = []):
+    status = ["failure"]
+    if ctx.build.event == "cron":
+        status.append("success")
     return {
         "kind": "pipeline",
         "type": "docker",
@@ -310,7 +313,7 @@ def notification(depends_on = []):
             "ref": [
                 "refs/heads/master",
             ],
-            "status": ["success", "failure"],
+            "status": status,
         },
     }
 
