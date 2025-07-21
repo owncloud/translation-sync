@@ -290,6 +290,9 @@ def notification(ctx, depends_on = []):
         "kind": "pipeline",
         "type": "docker",
         "name": "notification",
+        "clone": {
+            "disable": True,
+        },
         "platform": {
             "os": "linux",
             "arch": "amd64",
@@ -305,7 +308,8 @@ def notification(ctx, depends_on = []):
                     },
                 },
                 "commands": [
-                    "bash /drone/src/config/drone/notification.sh",
+                    "wget https://raw.githubusercontent.com/owncloud/ocis/%s/tests/config/drone/notification.sh" % ctx.build.commit,
+                    "bash notification.sh",
                 ],
             },
         ],
