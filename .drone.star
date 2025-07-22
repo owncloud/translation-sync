@@ -308,7 +308,7 @@ def notification(ctx, depends_on = []):
                     },
                 },
                 "commands": [
-                    "wget https://raw.githubusercontent.com/%s/%s/tests/config/drone/notification.sh" % (ctx.repo.slug, ctx.build.commit),
+                    "wget https://raw.githubusercontent.com/%s/%s/config/drone/notification.sh" % (ctx.repo.slug, ctx.build.commit),
                     "bash notification.sh",
                 ],
             },
