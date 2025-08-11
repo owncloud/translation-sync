@@ -41,9 +41,12 @@ def main(ctx):
         repo(name = "user_ldap", mode = "old"),
         repo(name = "encryption", mode = "old"),
         repo(name = "ocis", mode = "make"),
-        repo(name = "ocis-stable-7.1", mode = "make", branch = "stable-7.1", url = "https://github.com/owncloud/ocis.git", git = "git@github.com:owncloud/ocis.git"),
+        repo(name = "ocis-stable-7.1", mode = "make", branch = "stable-7.1", repo = "ocis"),
+        repo(name = "ocis-stable-7.2", mode = "make", branch = "stable-7.2", repo = "ocis"),
         repo(name = "openidconnect", mode = "make"),
         repo(name = "web", mode = "make", package_manager = "pnpm"),
+        repo(name = "web-stable-11.0", mode = "make", package_manager = "pnpm", branch = "stable-11.0-correct", repo = "web"),
+        repo(name = "web-stable-11.1", mode = "make", package_manager = "pnpm", branch = "stable-11.0", repo = "web"),
         repo(name = "web-extensions", mode = "make", branch = "main", package_manager = "pnpm"),
         repo(
             name = "android",
@@ -57,9 +60,10 @@ def main(ctx):
 
     return repo_pipelines + [notification(ctx, depends_on = repo_pipeline_names)]
 
-def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make", package_manager = "npm"):
-    url = url if url != "" else "https://github.com/owncloud/" + name + ".git"
-    git = git if git != "" else "git@github.com:owncloud/" + name + ".git"
+def repo(name, url = "", git = "", sub_path = "", branch = "master", mode = "make", package_manager = "npm", repo=""):
+    repo = repo if repo != "" else name
+    url = url if url != "" else "https://github.com/owncloud/" + repo + ".git"
+    git = git if git != "" else "git@github.com:owncloud/" + repo + ".git"
     path = name
     sub_path = sub_path if sub_path != "" else ("l10n" if mode == "old" else ".")
     work_dir = "%s/%s" % (path, sub_path)
