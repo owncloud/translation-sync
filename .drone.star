@@ -41,7 +41,6 @@ def main(ctx):
         repo(name = "user_ldap", mode = "old"),
         repo(name = "encryption", mode = "old"),
         repo(name = "ocis", mode = "make"),
-        repo(name = "ocis-stable-7.1", mode = "make", branch = "stable-7.1", url = "https://github.com/owncloud/ocis.git", git = "git@github.com:owncloud/ocis.git"),
         repo(name = "openidconnect", mode = "make"),
         repo(name = "web", mode = "make", package_manager = "pnpm"),
         repo(name = "web-extensions", mode = "make", branch = "main", package_manager = "pnpm"),
