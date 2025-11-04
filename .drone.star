@@ -10,7 +10,6 @@ def main(ctx):
         repo(name = "diagnostics", mode = "old"),
         repo(name = "drawio", mode = "old"),
         repo(name = "external", mode = "old"),
-        repo(name = "file-picker", mode = "make"),
         repo(name = "files_antivirus", mode = "old"),
         repo(name = "files_external_dropbox", mode = "old"),
         repo(name = "files_external_ftp", mode = "old"),
