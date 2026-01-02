@@ -2,13 +2,25 @@
 
 [![Build Status](https://drone.owncloud.com/api/badges/owncloud/translation-sync/status.svg)](https://drone.owncloud.com/owncloud/translation-sync)
 
-Within this repository we define a DroneCI configuration to sync Transifex translations every night for different repositories. If you want to get automated translation sync for your app as well please file a pull request to this repository and add [ownclouders](https://github.com/ownclouders) with write permissions to your repository.
+Within this repository, we define a DroneCI configuration to sync Transifex translations every night (or triggered manually) for different repositories. This is required because you need elevated Transifex permissions which are proveded by drone secrets only. If you want to get automated translation sync for your app as well please file a pull request to this repository and add [ownclouders](https://github.com/ownclouders) with write permissions to your repository.
 
-## Local testing
+**Table of Contents**
+
+   * [Local Testing](#local-testing)
+      * [Pull new Translations for the Guests Apps](#pull-new-translations-for-the-guests-apps)
+   * [Push Translations for Web](#push-translations-for-web)
+   * [Migrate Resources](#migrate-resources)
+   * [Trigger Syncing Manually](#trigger-syncing-manually)
+   * [License](#license)
+   * [Copyright](#copyright)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+
+## Local Testing
 
 You can test the synchronisation of translations for a specific repo by cloning the repo into your checkout of this repo and running `drone exec` like this:
 
-### Pull new translations for the guests apps
+### Pull new Translations for the Guests Apps
 
 Normally the pull is done every 24h automatically. You can do the pull manually with
 
@@ -36,7 +48,7 @@ rmdir ?? ??_??
 git diff
 ```
 
-## Push translations for web
+## Push Translations for Web
 
 ```Shell
 git clone https://github.com/owncloud/web.git
@@ -46,6 +58,20 @@ TX_TOKEN=... REPO_NAME=owncloud_universal REPO_URL=https://github.com/owncloud/w
 The trick is to prepend the folder to which the repo was cloned to the `REPO_PATH`.
 
 You can generate a [Transifex token](https://www.transifex.com/user/settings/api/) for the `TX_TOKEN` env var.
+
+## Migrate Resources
+
+Follow the [step-by-step](docs/migrate.md) guide if the relocation of resources is required.
+
+## Trigger Syncing Manually
+
+If there is a manual “emergency” sync required, you only need to trigger [drone](https://drone.owncloud.com/owncloud/translation-sync) via the CLI:
+
+```bash
+drone cron exec owncloud/translation-sync nightly
+```
+
+Note that you need to be logged on in drone to execute the command.
 
 ## License
 
