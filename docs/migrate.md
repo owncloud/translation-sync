@@ -26,6 +26,7 @@ Note that `tx push` and `tx delete` commands **require** elevated permissions. S
       * [Run the tx Command](#run-the-tx-command)
       * [Remove Irrelevant Configs](#remove-irrelevant-configs)
    * [Download Translations](#download-translations)
+   * [Fix Possible Translation String Issues](#fix-possible-translation-string-issues)
    * [Define the Target Project](#define-the-target-project)
    * [Upload to the Target Project](#upload-to-the-target-project)
    * [Review the Pushed Resources](#review-the-pushed-resources)
@@ -166,6 +167,19 @@ To pull all translations of the resources defined in the configuration to the lo
 tx pull -s -t -all --minimum-perc 4
 ```
 
+## Fix Possible Translation String Issues
+
+In rare cases, when you upload the data to the final project after pulling, it may happen that the `tx` command complains about unescaped characters. This is a `tx` bug and occurs, as far we have identified, only with strings containing `href="`. In this case, although the source string in the repo has escaped correctly (`href=\"`), `tx` does not pull correctly, it removes escaping, and when pushing, the unescaped character in the string causes issues. Sadly you cant easily just push corrected data after fixing easily, you must delete the upload completely and fix the issue before pushing.
+
+To avoid the issue and have clean sources, run a grep in the transifex folder and check if you are affected:
+
+```bash
+grep -rl 'href="'
+```
+
+If there are matches, fix in all files reported, all unescaped quotes from `"` --> `\"`.\
+Note that the affected files may have more unescaped quotes than greped. All unescaped characters of that file need to be escaped manually!
+ 
 ## Define the Target Project
 
 This step defines the target project where these resources with their translations will be uploaded to.
