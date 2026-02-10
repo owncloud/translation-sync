@@ -32,6 +32,7 @@ Note that `tx push` and `tx delete` commands **require** elevated permissions. S
    * [Review the Pushed Resources](#review-the-pushed-resources)
       * [Delete Faulty Resources](#delete-faulty-resources)
    * [Reconfigure the Source Configuration](#reconfigure-the-source-configuration)
+   * [Synchronisation Checking](#synchronisation-checking)
    * [Delete Original Resources](#delete-original-resources)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
@@ -169,7 +170,7 @@ tx pull -s -t -all --minimum-perc 4
 
 ## Fix Possible Translation String Issues
 
-In rare cases, when you upload the data to the final project after pulling, it may happen that the `tx` command complains about unescaped characters. This is a `tx` bug and occurs, as far we have identified, only with strings containing `href="`. In this case, although the source string in the repo has escaped correctly (`href=\"`), `tx` does not pull correctly, it removes escaping, and when pushing, the unescaped character in the string causes issues. Sadly you cant easily just push corrected data after fixing easily, you must delete the upload completely and fix the issue before pushing.
+In rare cases, after pulling, when you upload the data to the final project, it may happen that the `tx` command complains about unescaped characters. This is a `tx` bug that, as far as we have identified, only occurs with strings containing `href=`. In this case, although the source string in the repository has been escaped properly (`href=\"`), `tx` does not work correctly. It removes the escaping character (`\`) from any character that needs escaping at any location in the string. When pushing, the unescaped character(s) now cause issues. Unfortunately, you can't just easily push the corrected data after making the fix. You must delete the upload completely before pushing the fix.
 
 To avoid the issue and have clean sources, run a grep in the transifex folder and check if you are affected:
 
@@ -237,9 +238,19 @@ The `project_slug` must be updated in the **sourcing repository** for all succes
 
 Create a PR for this change and merge it.
 
+## Synchronisation Checking
+
+The easiest way to avoid waiting for the nightly automatic translation sync is to initiate a manual sync. See [owncloud.dev](https://owncloud.dev/services/general-info/add-translations/) for more information.
+
+When a sync pass is complete, check the commit in the target repository to ensure that the changes applied correctly.
+
+In *some* cases, the `tx push` command or the Transifex web UI replaces a `?` with an escaped version `\?` in the middle of a string. We have not found a reason for this and consider it to be a bug. The local strings are correct, but the web UI has a different version. To fix this and return to the original content, you must manually correct it via the web UI in all translations. Simply search for `\?` and select through the languages. When you find a match, correct it by removing the added escaping character if it is not present in the source string.
+
+Once you have finished, perform a manual sync and check again. You should now have the relocated resources as they were in the original project.
+
 ## Delete Original Resources
 
-After merging the PR and running the `translation-sync` successfully (either manually or via the nightly job), if no issues arise, you can safely delete the resources from the original project. You can do this via the Transifex GUI or the command line.
+After merging and checking successfully completes, you can safely delete the resources from the original project. You can do this via the Transifex GUI or the command line.
 
 * From the GUI, as an example, select the [owncloud](https://app.transifex.com/owncloud-org/owncloud/content/) project and filter the resource to be deleted, such as `ocis-`. Then checkmark all mathcing resources and press delete.
 
