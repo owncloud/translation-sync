@@ -177,7 +177,7 @@ To avoid the issue and have clean sources, run a grep in the transifex folder an
 grep -rl 'href="'
 ```
 
-If there are matches, fix in all files reported, all unescaped quotes from `"` --> `\"`.\
+If there are matches, change all unescaped quotes from `"` to `\"` in all files reported.
 Note that the affected files may have more unescaped quotes than greped. All unescaped characters of that file need to be escaped manually!
  
 ## Define the Target Project
