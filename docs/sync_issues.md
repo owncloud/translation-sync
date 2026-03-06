@@ -10,7 +10,7 @@
 
 ## Background Info
 
-The way drone is curently setup syncing translations has a downside. If there is an issue with one translation string, in particular e.g. unescaped forbidden charactrers, the respective drone step passes but no sync is taking place. This means, from the outside everything is ok, but newly created strings from that repo are not pushed to Transifex! Note that pulling, getting back translations to the repo, is not affected.
+The way drone is currently setup syncing translations has a downside. If there is an issue with one translation string, in particular e.g. unescaped forbidden characters, the respective drone step passes but no sync is taking place. This means, from the outside everything is ok, but newly created strings from that repo are not pushed to Transifex! Note that pulling, getting back translations to the repo, is not affected.
 
 **IMPORTANT:**
 
