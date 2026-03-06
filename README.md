@@ -9,8 +9,9 @@ Within this repository, we define a DroneCI configuration to sync Transifex tran
    * [Local Testing](#local-testing)
       * [Pull new Translations for the Guests Apps](#pull-new-translations-for-the-guests-apps)
    * [Push Translations for Web](#push-translations-for-web)
-   * [Migrate Resources](#migrate-resources)
    * [Trigger Syncing Manually](#trigger-syncing-manually)
+   * [Finding and Fixing Sync Issues](#finding-and-fixing-sync-issues)
+   * [Migrate Resources](#migrate-resources)
    * [License](#license)
    * [Copyright](#copyright)
 
@@ -59,19 +60,27 @@ The trick is to prepend the folder to which the repo was cloned to the `REPO_PAT
 
 You can generate a [Transifex token](https://www.transifex.com/user/settings/api/) for the `TX_TOKEN` env var.
 
-## Migrate Resources
-
-Follow the [step-by-step](docs/migrate.md) guide if the relocation of resources is required.
-
 ## Trigger Syncing Manually
 
-If there is a manual “emergency” sync required, you only need to trigger [drone](https://drone.owncloud.com/owncloud/translation-sync) via the CLI:
+In case a manual “emergency” sync required, you only need to trigger [drone](https://drone.owncloud.com/owncloud/translation-sync) via the CLI.
+
+If you have not installed drone locally, follow [drone installation](https://docs.drone.io/cli/install/) documentation first. Then, from the command line, you need to apply your token which you can find in your [drone account settings](https://drone.owncloud.com/account) by pasting the **Example CLI Usage** command.
+
+Finally paste the following command to initiate the manual sync:
 
 ```bash
 drone cron exec owncloud/translation-sync nightly
 ```
 
 Note that you need to be logged on in drone to execute the command.
+
+## Finding and Fixing Sync Issues
+
+Follow the [step-by-step](docs/sync_issues.md) guide if sync issues occur.
+
+## Migrate Resources
+
+Follow the [step-by-step](docs/migrate.md) guide if the relocation of resources is required.
 
 ## License
 
