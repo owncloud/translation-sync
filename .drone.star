@@ -27,7 +27,6 @@ def main(ctx):
         repo(name = "oauth2", mode = "old"),
         repo(name = "password_policy", mode = "old"),
         repo(name = "richdocuments", mode = "old"),
-        repo(name = "tasks", mode = "old"),
         repo(name = "twofactor_backup_codes", mode = "old"),
         repo(
             name = "twofactor_privacyidea",
