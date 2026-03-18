@@ -13,7 +13,6 @@ def main(ctx):
         repo(name = "files_antivirus", mode = "old"),
         repo(name = "files_external_dropbox", mode = "old"),
         repo(name = "files_external_ftp", mode = "old"),
-        repo(name = "files_external_gdrive", mode = "old"),
         repo(name = "files_paperhive", mode = "old"),
         repo(name = "files_primary_s3", mode = "make"),
         repo(name = "files_mediaviewer", mode = "make"),
