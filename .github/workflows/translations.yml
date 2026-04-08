@@ -361,8 +361,8 @@ jobs:
         with:
           target_branch: ${{ matrix.branch }}
           commit_message: "[tx] updated from transifex"
-          commit_user_name: ownClouders
-          commit_user_email: devops@owncloud.com
-          files_pattern: ${{ matrix.name }}
-          empty_commit: false
+          name: ownClouders
+          email: devops@owncloud.com
+          files: ${{ matrix.name }}
+          empty: 0
           access_token: ${{ secrets.GIT_PUSH_PAT }}
