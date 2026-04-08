@@ -25,7 +25,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/core.git
-            git: git@github.com:owncloud/core.git
 
           - name: activity
             mode: old
@@ -33,7 +32,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/activity.git
-            git: git@github.com:owncloud/activity.git
 
           - name: announcementcenter
             mode: old
@@ -41,7 +39,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/announcementcenter.git
-            git: git@github.com:owncloud/announcementcenter.git
 
           - name: brute_force_protection
             mode: old
@@ -49,7 +46,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/brute_force_protection.git
-            git: git@github.com:owncloud/brute_force_protection.git
 
           - name: calendar
             mode: old
@@ -57,7 +53,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/calendar.git
-            git: git@github.com:owncloud/calendar.git
 
           - name: contacts
             mode: old
@@ -65,7 +60,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/contacts.git
-            git: git@github.com:owncloud/contacts.git
 
           - name: customgroups
             mode: old
@@ -73,7 +67,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/customgroups.git
-            git: git@github.com:owncloud/customgroups.git
 
           - name: diagnostics
             mode: old
@@ -81,7 +74,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/diagnostics.git
-            git: git@github.com:owncloud/diagnostics.git
 
           - name: drawio
             mode: old
@@ -89,7 +81,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/drawio.git
-            git: git@github.com:owncloud/drawio.git
 
           - name: external
             mode: old
@@ -97,7 +88,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/external.git
-            git: git@github.com:owncloud/external.git
 
           - name: files_antivirus
             mode: old
@@ -105,7 +95,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/files_antivirus.git
-            git: git@github.com:owncloud/files_antivirus.git
 
           - name: files_external_dropbox
             mode: old
@@ -113,7 +102,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/files_external_dropbox.git
-            git: git@github.com:owncloud/files_external_dropbox.git
 
           - name: files_external_ftp
             mode: old
@@ -121,7 +109,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/files_external_ftp.git
-            git: git@github.com:owncloud/files_external_ftp.git
 
           - name: files_paperhive
             mode: old
@@ -129,7 +116,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/files_paperhive.git
-            git: git@github.com:owncloud/files_paperhive.git
 
           - name: files_primary_s3
             mode: make
@@ -137,7 +123,6 @@ jobs:
             sub_path: .
             package_manager: npm
             url: https://github.com/owncloud/files_primary_s3.git
-            git: git@github.com:owncloud/files_primary_s3.git
 
           - name: files_mediaviewer
             mode: make
@@ -145,7 +130,6 @@ jobs:
             sub_path: .
             package_manager: npm
             url: https://github.com/owncloud/files_mediaviewer.git
-            git: git@github.com:owncloud/files_mediaviewer.git
 
           - name: files_texteditor
             mode: old
@@ -153,7 +137,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/files_texteditor.git
-            git: git@github.com:owncloud/files_texteditor.git
 
           - name: files_pdfviewer
             mode: make
@@ -161,7 +144,6 @@ jobs:
             sub_path: .
             package_manager: npm
             url: https://github.com/owncloud/files_pdfviewer.git
-            git: git@github.com:owncloud/files_pdfviewer.git
 
           - name: firstrunwizard
             mode: old
@@ -169,7 +151,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/firstrunwizard.git
-            git: git@github.com:owncloud/firstrunwizard.git
 
           - name: guests
             mode: old
@@ -177,7 +158,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/guests.git
-            git: git@github.com:owncloud/guests.git
 
           - name: impersonate
             mode: old
@@ -185,7 +165,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/impersonate.git
-            git: git@github.com:owncloud/impersonate.git
 
           - name: notes
             mode: old
@@ -193,7 +172,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/notes.git
-            git: git@github.com:owncloud/notes.git
 
           - name: notifications
             mode: old
@@ -201,7 +179,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/notifications.git
-            git: git@github.com:owncloud/notifications.git
 
           - name: oauth2
             mode: old
@@ -209,7 +186,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/oauth2.git
-            git: git@github.com:owncloud/oauth2.git
 
           - name: password_policy
             mode: old
@@ -217,7 +193,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/password_policy.git
-            git: git@github.com:owncloud/password_policy.git
 
           - name: richdocuments
             mode: old
@@ -225,7 +200,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/richdocuments.git
-            git: git@github.com:owncloud/richdocuments.git
 
           - name: twofactor_backup_codes
             mode: old
@@ -233,15 +207,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/twofactor_backup_codes.git
-            git: git@github.com:owncloud/twofactor_backup_codes.git
-
-          - name: twofactor_privacyidea
-            mode: old
-            branch: master
-            sub_path: twofactor_privacyidea/l10n
-            package_manager: npm
-            url: https://github.com/privacyidea/privacyidea-owncloud-app.git
-            git: git@github.com:privacyidea/privacyidea-owncloud-app.git
 
           - name: twofactor_totp
             mode: old
@@ -249,7 +214,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/twofactor_totp.git
-            git: git@github.com:owncloud/twofactor_totp.git
 
           - name: user_ldap
             mode: old
@@ -257,7 +221,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/user_ldap.git
-            git: git@github.com:owncloud/user_ldap.git
 
           - name: encryption
             mode: old
@@ -265,7 +228,6 @@ jobs:
             sub_path: l10n
             package_manager: npm
             url: https://github.com/owncloud/encryption.git
-            git: git@github.com:owncloud/encryption.git
 
           - name: ocis
             mode: make
@@ -273,7 +235,6 @@ jobs:
             sub_path: .
             package_manager: npm
             url: https://github.com/owncloud/ocis.git
-            git: git@github.com:owncloud/ocis.git
 
           - name: openidconnect
             mode: make
@@ -281,7 +242,6 @@ jobs:
             sub_path: .
             package_manager: npm
             url: https://github.com/owncloud/openidconnect.git
-            git: git@github.com:owncloud/openidconnect.git
 
           - name: web
             mode: make
@@ -289,7 +249,6 @@ jobs:
             sub_path: .
             package_manager: pnpm
             url: https://github.com/owncloud/web.git
-            git: git@github.com:owncloud/web.git
 
           - name: web-extensions
             mode: make
@@ -297,7 +256,6 @@ jobs:
             sub_path: .
             package_manager: pnpm
             url: https://github.com/owncloud/web-extensions.git
-            git: git@github.com:owncloud/web-extensions.git
 
           - name: android
             mode: native
@@ -305,14 +263,16 @@ jobs:
             sub_path: .
             package_manager: npm
             url: https://github.com/owncloud/android.git
-            git: git@github.com:owncloud/android.git
 
     steps:
       - name: Configure git
+        env:
+          GIT_PUSH_PAT: ${{ secrets.GIT_PUSH_PAT }}
         run: |
           git config --global user.name "ownClouders"
           git config --global user.email "devops@owncloud.com"
           git config --global --add safe.directory '*'
+          git config --global url."https://x-access-token:${GIT_PUSH_PAT}@github.com/".insteadOf "https://github.com/"
 
       - name: Wipe checkout
         run: rm -rf '${{ matrix.name }}'
@@ -415,21 +375,8 @@ jobs:
           cd '${{ matrix.name }}'
           git show -p
 
-      - name: Setup SSH key
-        if: github.ref == 'refs/heads/master'
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GIT_PUSH_SSH_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Push translations
         if: github.ref == 'refs/heads/master'
-        env:
-          GIT_SSH_COMMAND: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no
         run: |
           cd '${{ matrix.name }}'
-          git remote set-url origin '${{ matrix.git }}'
           git push origin '${{ matrix.branch }}'
