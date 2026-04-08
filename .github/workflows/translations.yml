@@ -433,18 +433,3 @@ jobs:
           cd '${{ matrix.name }}'
           git remote set-url origin '${{ matrix.git }}'
           git push origin '${{ matrix.branch }}'
-
-  notification:
-    name: notification
-    runs-on: ubuntu-latest
-    needs: sync
-    if: always() && github.ref == 'refs/heads/master' && (needs.sync.result == 'failure' || (needs.sync.result == 'success' && github.event_name == 'schedule'))
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Send Matrix notification
-        env:
-          MATRIX_TOKEN: ${{ secrets.MATRIX_TOKEN }}
-          JOB_STATUS: ${{ needs.sync.result }}
-        run: bash config/github/notification.sh
