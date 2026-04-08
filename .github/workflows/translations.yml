@@ -24,252 +24,220 @@ jobs:
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/core.git
 
           - name: activity
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/activity.git
 
           - name: announcementcenter
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/announcementcenter.git
 
           - name: brute_force_protection
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/brute_force_protection.git
 
           - name: calendar
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/calendar.git
 
           - name: contacts
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/contacts.git
 
           - name: customgroups
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/customgroups.git
 
           - name: diagnostics
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/diagnostics.git
 
           - name: drawio
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/drawio.git
 
           - name: external
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/external.git
 
           - name: files_antivirus
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/files_antivirus.git
 
           - name: files_external_dropbox
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/files_external_dropbox.git
 
           - name: files_external_ftp
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/files_external_ftp.git
 
           - name: files_paperhive
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/files_paperhive.git
 
           - name: files_primary_s3
             mode: make
             branch: master
             sub_path: .
             package_manager: npm
-            url: https://github.com/owncloud/files_primary_s3.git
 
           - name: files_mediaviewer
             mode: make
             branch: master
             sub_path: .
             package_manager: npm
-            url: https://github.com/owncloud/files_mediaviewer.git
 
           - name: files_texteditor
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/files_texteditor.git
 
           - name: files_pdfviewer
             mode: make
             branch: master
             sub_path: .
             package_manager: npm
-            url: https://github.com/owncloud/files_pdfviewer.git
 
           - name: firstrunwizard
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/firstrunwizard.git
 
           - name: guests
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/guests.git
 
           - name: impersonate
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/impersonate.git
 
           - name: notes
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/notes.git
 
           - name: notifications
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/notifications.git
 
           - name: oauth2
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/oauth2.git
 
           - name: password_policy
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/password_policy.git
 
           - name: richdocuments
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/richdocuments.git
 
           - name: twofactor_backup_codes
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/twofactor_backup_codes.git
 
           - name: twofactor_totp
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/twofactor_totp.git
 
           - name: user_ldap
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/user_ldap.git
 
           - name: encryption
             mode: old
             branch: master
             sub_path: l10n
             package_manager: npm
-            url: https://github.com/owncloud/encryption.git
 
           - name: ocis
             mode: make
             branch: master
             sub_path: .
             package_manager: npm
-            url: https://github.com/owncloud/ocis.git
 
           - name: openidconnect
             mode: make
             branch: master
             sub_path: .
             package_manager: npm
-            url: https://github.com/owncloud/openidconnect.git
 
           - name: web
             mode: make
             branch: master
             sub_path: .
             package_manager: pnpm
-            url: https://github.com/owncloud/web.git
 
           - name: web-extensions
             mode: make
             branch: main
             sub_path: .
             package_manager: pnpm
-            url: https://github.com/owncloud/web-extensions.git
 
           - name: android
             mode: native
             branch: master
             sub_path: .
             package_manager: npm
-            url: https://github.com/owncloud/android.git
 
     steps:
-      - name: Wipe checkout
-        run: rm -rf '${{ matrix.name }}'
-
-      - name: Clone repository
-        run: git clone --branch '${{ matrix.branch }}' '${{ matrix.url }}' '${{ matrix.name }}'
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: owncloud/${{ matrix.name }}
+          ref: ${{ matrix.branch }}
+          path: ${{ matrix.name }}
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Create translation directory
         if: matrix.mode == 'old'
