@@ -265,13 +265,6 @@ jobs:
             url: https://github.com/owncloud/android.git
 
     steps:
-      - name: Configure git
-        env:
-          GIT_PUSH_PAT: ${{ secrets.GIT_PUSH_PAT }}
-        run: |
-          git config --global --add safe.directory '*'
-          git config --global url."https://x-access-token:${GIT_PUSH_PAT}@github.com/".insteadOf "https://github.com/"
-
       - name: Wipe checkout
         run: rm -rf '${{ matrix.name }}'
 
@@ -372,3 +365,4 @@ jobs:
           commit_user_email: devops@owncloud.com
           files_pattern: ${{ matrix.name }}
           empty_commit: false
+          access_token: ${{ secrets.GIT_PUSH_PAT }}
