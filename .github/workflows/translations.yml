@@ -1,0 +1,449 @@
+name: Translation Sync
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    container:
+      image: owncloudci/transifex:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: core
+            mode: make
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/core.git
+            git: git@github.com:owncloud/core.git
+
+          - name: activity
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/activity.git
+            git: git@github.com:owncloud/activity.git
+
+          - name: announcementcenter
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/announcementcenter.git
+            git: git@github.com:owncloud/announcementcenter.git
+
+          - name: brute_force_protection
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/brute_force_protection.git
+            git: git@github.com:owncloud/brute_force_protection.git
+
+          - name: calendar
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/calendar.git
+            git: git@github.com:owncloud/calendar.git
+
+          - name: contacts
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/contacts.git
+            git: git@github.com:owncloud/contacts.git
+
+          - name: customgroups
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/customgroups.git
+            git: git@github.com:owncloud/customgroups.git
+
+          - name: diagnostics
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/diagnostics.git
+            git: git@github.com:owncloud/diagnostics.git
+
+          - name: drawio
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/drawio.git
+            git: git@github.com:owncloud/drawio.git
+
+          - name: external
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/external.git
+            git: git@github.com:owncloud/external.git
+
+          - name: files_antivirus
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/files_antivirus.git
+            git: git@github.com:owncloud/files_antivirus.git
+
+          - name: files_external_dropbox
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/files_external_dropbox.git
+            git: git@github.com:owncloud/files_external_dropbox.git
+
+          - name: files_external_ftp
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/files_external_ftp.git
+            git: git@github.com:owncloud/files_external_ftp.git
+
+          - name: files_paperhive
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/files_paperhive.git
+            git: git@github.com:owncloud/files_paperhive.git
+
+          - name: files_primary_s3
+            mode: make
+            branch: master
+            sub_path: .
+            package_manager: npm
+            url: https://github.com/owncloud/files_primary_s3.git
+            git: git@github.com:owncloud/files_primary_s3.git
+
+          - name: files_mediaviewer
+            mode: make
+            branch: master
+            sub_path: .
+            package_manager: npm
+            url: https://github.com/owncloud/files_mediaviewer.git
+            git: git@github.com:owncloud/files_mediaviewer.git
+
+          - name: files_texteditor
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/files_texteditor.git
+            git: git@github.com:owncloud/files_texteditor.git
+
+          - name: files_pdfviewer
+            mode: make
+            branch: master
+            sub_path: .
+            package_manager: npm
+            url: https://github.com/owncloud/files_pdfviewer.git
+            git: git@github.com:owncloud/files_pdfviewer.git
+
+          - name: firstrunwizard
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/firstrunwizard.git
+            git: git@github.com:owncloud/firstrunwizard.git
+
+          - name: guests
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/guests.git
+            git: git@github.com:owncloud/guests.git
+
+          - name: impersonate
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/impersonate.git
+            git: git@github.com:owncloud/impersonate.git
+
+          - name: notes
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/notes.git
+            git: git@github.com:owncloud/notes.git
+
+          - name: notifications
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/notifications.git
+            git: git@github.com:owncloud/notifications.git
+
+          - name: oauth2
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/oauth2.git
+            git: git@github.com:owncloud/oauth2.git
+
+          - name: password_policy
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/password_policy.git
+            git: git@github.com:owncloud/password_policy.git
+
+          - name: richdocuments
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/richdocuments.git
+            git: git@github.com:owncloud/richdocuments.git
+
+          - name: twofactor_backup_codes
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/twofactor_backup_codes.git
+            git: git@github.com:owncloud/twofactor_backup_codes.git
+
+          - name: twofactor_privacyidea
+            mode: old
+            branch: master
+            sub_path: twofactor_privacyidea/l10n
+            package_manager: npm
+            url: https://github.com/privacyidea/privacyidea-owncloud-app.git
+            git: git@github.com:privacyidea/privacyidea-owncloud-app.git
+
+          - name: twofactor_totp
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/twofactor_totp.git
+            git: git@github.com:owncloud/twofactor_totp.git
+
+          - name: user_ldap
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/user_ldap.git
+            git: git@github.com:owncloud/user_ldap.git
+
+          - name: encryption
+            mode: old
+            branch: master
+            sub_path: l10n
+            package_manager: npm
+            url: https://github.com/owncloud/encryption.git
+            git: git@github.com:owncloud/encryption.git
+
+          - name: ocis
+            mode: make
+            branch: master
+            sub_path: .
+            package_manager: npm
+            url: https://github.com/owncloud/ocis.git
+            git: git@github.com:owncloud/ocis.git
+
+          - name: openidconnect
+            mode: make
+            branch: master
+            sub_path: .
+            package_manager: npm
+            url: https://github.com/owncloud/openidconnect.git
+            git: git@github.com:owncloud/openidconnect.git
+
+          - name: web
+            mode: make
+            branch: master
+            sub_path: .
+            package_manager: pnpm
+            url: https://github.com/owncloud/web.git
+            git: git@github.com:owncloud/web.git
+
+          - name: web-extensions
+            mode: make
+            branch: main
+            sub_path: .
+            package_manager: pnpm
+            url: https://github.com/owncloud/web-extensions.git
+            git: git@github.com:owncloud/web-extensions.git
+
+          - name: android
+            mode: native
+            branch: master
+            sub_path: .
+            package_manager: npm
+            url: https://github.com/owncloud/android.git
+            git: git@github.com:owncloud/android.git
+
+    steps:
+      - name: Configure git
+        run: |
+          git config --global user.name "ownClouders"
+          git config --global user.email "devops@owncloud.com"
+          git config --global --add safe.directory '*'
+
+      - name: Wipe checkout
+        run: rm -rf '${{ matrix.name }}'
+
+      - name: Clone repository
+        run: git clone --branch '${{ matrix.branch }}' '${{ matrix.url }}' '${{ matrix.name }}'
+
+      - name: Create translation directory
+        if: matrix.mode == 'old'
+        run: mkdir -p '${{ matrix.name }}/${{ matrix.sub_path }}'
+
+      - name: Translation reader (make)
+        if: matrix.mode == 'make'
+        env:
+          NO_INSTALL: "true"
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          if [ '${{ matrix.package_manager }}' = 'pnpm' ]; then
+            npm install --silent --global --force "$(jq -r '.packageManager' < package.json)"
+            pnpm config set store-dir ./.pnpm-store
+            pnpm install
+          fi
+          make l10n-read
+
+      - name: Translation reader (old)
+        if: matrix.mode == 'old'
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          l10n '${{ matrix.name }}' read
+
+      - name: Translation push (make)
+        if: matrix.mode == 'make' && github.ref == 'refs/heads/master'
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          make l10n-push
+
+      - name: Translation push (old)
+        if: matrix.mode == 'old' && github.ref == 'refs/heads/master'
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          tx push -s --skip
+
+      - name: Translation pull (make)
+        if: matrix.mode == 'make'
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          make l10n-pull
+
+      - name: Translation pull (old/native)
+        if: matrix.mode != 'make'
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          tx pull -a --skip --minimum-perc=75 -f
+
+      - name: Translation writer (make)
+        if: matrix.mode == 'make'
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          make l10n-write
+
+      - name: Translation writer (old)
+        if: matrix.mode == 'old'
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          l10n '${{ matrix.name }}' write
+
+      - name: Translation cleanup (make)
+        if: matrix.mode == 'make'
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          make l10n-clean
+
+      - name: Translation cleanup (old)
+        if: matrix.mode == 'old'
+        run: |
+          cd '${{ matrix.name }}/${{ matrix.sub_path }}'
+          find . -name "*.po" -type f -delete
+          find . -name "*.pot" -type f -delete
+          find . -name "or_IN.*" -type f -print0 | xargs -r -0 git rm -f
+          find . -name "uz.*" -type f -print0 | xargs -r -0 git rm -f
+          find . -name "yo.*" -type f -print0 | xargs -r -0 git rm -f
+          find . -name "ne.*" -type f -print0 | xargs -r -0 git rm -f
+
+      - name: Commit translations
+        run: |
+          cd '${{ matrix.name }}'
+          git add -A
+          git diff --staged --quiet || git commit -m "[tx] updated from transifex"
+
+      - name: Show commit
+        run: |
+          cd '${{ matrix.name }}'
+          git show -p
+
+      - name: Setup SSH key
+        if: github.ref == 'refs/heads/master'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GIT_PUSH_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Push translations
+        if: github.ref == 'refs/heads/master'
+        env:
+          GIT_SSH_COMMAND: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no
+        run: |
+          cd '${{ matrix.name }}'
+          git remote set-url origin '${{ matrix.git }}'
+          git push origin '${{ matrix.branch }}'
+
+  notification:
+    name: notification
+    runs-on: ubuntu-latest
+    needs: sync
+    if: always() && github.ref == 'refs/heads/master' && (needs.sync.result == 'failure' || (needs.sync.result == 'success' && github.event_name == 'schedule'))
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Send Matrix notification
+        env:
+          MATRIX_TOKEN: ${{ secrets.MATRIX_TOKEN }}
+          JOB_STATUS: ${{ needs.sync.result }}
+        run: bash config/github/notification.sh
