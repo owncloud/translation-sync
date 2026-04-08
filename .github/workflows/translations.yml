@@ -269,8 +269,6 @@ jobs:
         env:
           GIT_PUSH_PAT: ${{ secrets.GIT_PUSH_PAT }}
         run: |
-          git config --global user.name "ownClouders"
-          git config --global user.email "devops@owncloud.com"
           git config --global --add safe.directory '*'
           git config --global url."https://x-access-token:${GIT_PUSH_PAT}@github.com/".insteadOf "https://github.com/"
 
@@ -364,19 +362,13 @@ jobs:
           find . -name "yo.*" -type f -print0 | xargs -r -0 git rm -f
           find . -name "ne.*" -type f -print0 | xargs -r -0 git rm -f
 
-      - name: Commit translations
-        run: |
-          cd '${{ matrix.name }}'
-          git add -A
-          git diff --staged --quiet || git commit -m "[tx] updated from transifex"
-
-      - name: Show commit
-        run: |
-          cd '${{ matrix.name }}'
-          git show -p
-
-      - name: Push translations
+      - name: Commit and push translations
         if: github.ref == 'refs/heads/master'
-        run: |
-          cd '${{ matrix.name }}'
-          git push origin '${{ matrix.branch }}'
+        uses: GuillaumeFalourd/git-commit-push@205c043bca2f932f7a48a28a8d619ba30eb84baf
+        with:
+          target_branch: ${{ matrix.branch }}
+          commit_message: "[tx] updated from transifex"
+          commit_user_name: ownClouders
+          commit_user_email: devops@owncloud.com
+          files_pattern: ${{ matrix.name }}
+          empty_commit: false
